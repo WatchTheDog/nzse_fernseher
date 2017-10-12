@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Remote Achtelik Berghofer</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format"> Timo du stinkst! S%1$d/3</string>
+</resources>
