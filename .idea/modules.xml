@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/RemoteAchtelikBerghofer.iml" filepath="$PROJECT_DIR$/RemoteAchtelikBerghofer.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nzse_fernseher.iml" filepath="$PROJECT_DIR$/nzse_fernseher.iml" />
     </modules>
   </component>
 </project>
