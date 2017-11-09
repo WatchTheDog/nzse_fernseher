@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/nzse_fernseher.iml" filepath="$PROJECT_DIR$/nzse_fernseher.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/nzse_fernseher.iml" filepath="$PROJECT_DIR$/.idea/nzse_fernseher.iml" />
+      <module fileurl="file://C:\Users\Hans\StudioProjects\nzse_fernseher\nzse_fernseher.iml" filepath="C:\Users\Hans\StudioProjects\nzse_fernseher\nzse_fernseher.iml" />
     </modules>
   </component>
 </project>
