@@ -12,6 +12,10 @@ public class MainActivity extends AppCompatActivity {
     public MainActivity() {
     }
 
+    /** @brief wird beim Erstellen ausgeführt.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i("RemoteAchtelikBerghofer", "onCreate: ");
@@ -29,28 +33,46 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    /** @brief wird beim Klicken auf Hello World ausgeführt.
+     *
+     * @param v
+     */
     public void onHelloWorldClick (View v) {
         Log.i("RemoteAchtelikBerghofer", "onHelloWorldClick: ");
     }
 
+    /** @brief wird beim Starten ausgeführt.
+     *
+     */
     @Override
     protected void onStart() {
         Log.i ("RemoteAchtelikBerghofer", "onStart");
         super.onStart();
     }
 
+    /** @brief wird beim Stoppen ausgeführt.
+     *
+     */
     @Override
     protected void onStop() {
         Log.i ("RemoteAchtelikBerghofer", "onStop");
         super.onStop();
     }
 
+    /** @brief wird beim Speichern des aktuellen Stands ausgeführt.
+     *
+     * @param outState
+     */
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         Log.i ("RemoteAchtelikBerghofer", "onSaveInstanceState");
         super.onSaveInstanceState(outState);
     }
 
+    /** @brief wird beim weiter ausführen ausgeführt.
+     *
+     */
     @Override
     protected void onResume() {
         Log.i ("RemoteAchtelikBerghofer", "onResume");
