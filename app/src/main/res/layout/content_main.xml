@@ -8,23 +8,133 @@
     tools:context="com.timo.hans.remoteachtelikberghofer.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+    <Button
+        android:id="@+id/btnCHdown"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="165dp"
+        android:layout_height="93dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:fontFamily="sans-serif"
-        android:onClick="onHelloWorldClick"
-        android:text="Halo Wörld"
-        android:textSize="50sp"
-        android:typeface="sans"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@android:color/holo_orange_dark"
+        android:text="CH-"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.324" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnCHup"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="165dp"
+        android:layout_height="94dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/holo_orange_dark"
+        android:text="CH+"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnVoldown"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="165dp"
+        android:layout_height="93dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:background="@android:color/holo_orange_dark"
+        android:text="Volume-"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCHdown" />
+
+    <Button
+        android:id="@+id/btnVolup"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="165dp"
+        android:layout_height="94dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/holo_orange_dark"
+        android:text="Volume+"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCHup" />
+
+    <Button
+        android:id="@+id/btnChangeRatio"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="165dp"
+        android:layout_height="93dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:background="@android:color/holo_orange_dark"
+        android:text="Change Ratio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnVoldown" />
+
+    <Button
+        android:id="@+id/btnPip"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="165dp"
+        android:layout_height="94dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:background="@android:color/holo_orange_dark"
+        android:text="Picture in Picture"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnVolup" />
+
+    <Button
+        android:id="@+id/btnPauseResume"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="100dp"
+        android:layout_height="93dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:background="@android:drawable/ic_media_play"
+        android:backgroundTint="@android:color/holo_orange_dark"
+        app:layout_constraintEnd_toStartOf="@+id/btnFastForward"
+        app:layout_constraintHorizontal_bias="0.59"
+        app:layout_constraintStart_toEndOf="@+id/btnRewind"
+        app:layout_constraintTop_toBottomOf="@+id/btnPip" />
+
+    <Button
+        android:id="@+id/btnFastForward"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="100dp"
+        android:layout_height="94dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="32dp"
+        android:background="@android:drawable/ic_media_ff"
+        android:backgroundTint="@android:color/holo_orange_dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnPip" />
+
+    <Button
+        android:id="@+id/btnRewind"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="100dp"
+        android:layout_height="93dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:background="@android:drawable/ic_media_rew"
+        android:backgroundTint="@android:color/holo_orange_dark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnChangeRatio" />
+
 </android.support.constraint.ConstraintLayout>
