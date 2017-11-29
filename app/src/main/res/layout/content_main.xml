@@ -104,8 +104,8 @@
             android:layout_columnSpan="2"
             android:layout_margin="3dp"
             android:layout_row="3"
-            android:background="@color/carrot"
-            android:text="Re" />
+            android:background="@android:drawable/ic_media_rew"
+            android:backgroundTint="@color/carrot" />
 
         <Button
             android:id="@+id/btnPlayPause"
@@ -115,8 +115,8 @@
             android:layout_columnSpan="2"
             android:layout_margin="3dp"
             android:layout_row="3"
-            android:background="@color/carrot"
-            android:text="Play/Pause" />
+            android:background="@android:drawable/ic_media_play"
+            android:backgroundTint="@color/carrot" />
 
         <Button
             android:id="@+id/btnFastForward"
@@ -126,8 +126,8 @@
             android:layout_columnSpan="2"
             android:layout_margin="3dp"
             android:layout_row="3"
-            android:background="@color/carrot"
-            android:text="Fast Forward" />
+            android:background="@android:drawable/ic_media_ff"
+            android:backgroundTint="@color/carrot" />
 
     </GridLayout>
 
