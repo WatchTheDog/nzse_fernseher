@@ -105,6 +105,7 @@
             android:layout_margin="3dp"
             android:layout_row="3"
             android:background="@android:drawable/ic_media_rew"
+            android:backgroundTintMode="add"
             android:backgroundTint="@color/carrot" />
 
         <Button
@@ -116,7 +117,9 @@
             android:layout_margin="3dp"
             android:layout_row="3"
             android:background="@android:drawable/ic_media_play"
-            android:backgroundTint="@color/carrot" />
+            android:backgroundTintMode="add"
+            android:backgroundTint="@color/carrot"
+             />
 
         <Button
             android:id="@+id/btnFastForward"
@@ -127,6 +130,7 @@
             android:layout_margin="3dp"
             android:layout_row="3"
             android:background="@android:drawable/ic_media_ff"
+            android:backgroundTintMode="add"
             android:backgroundTint="@color/carrot" />
 
     </GridLayout>
