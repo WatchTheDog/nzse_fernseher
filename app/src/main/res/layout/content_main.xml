@@ -8,132 +8,127 @@
     tools:context="com.timo.hans.remoteachtelikberghofer.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <Button
-        android:id="@+id/btnCHdown"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="165dp"
-        android:layout_height="93dp"
+    <GridLayout
+        android:layout_width="358dp"
+        android:layout_height="510dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="80dp"
-        android:background="@android:color/holo_orange_dark"
-        android:text="CH-"
+        android:layout_marginTop="8dp"
+        android:padding="1dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/btnCHup"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="165dp"
-        android:layout_height="96dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="80dp"
-        android:background="@android:color/holo_orange_dark"
-        android:text="CH+"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/btnCHdown"
+            android:layout_width="172dp"
+            android:layout_height="120dp"
+            android:layout_column="0"
+            android:layout_margin="3dp"
+            android:layout_columnSpan="3"
+            android:layout_row="0"
+            android:layout_rowSpan="17"
+            android:background="@color/carrot"
+            android:text="CH-"
+            tools:layout_editor_absoluteX="116dp"
+            tools:layout_editor_absoluteY="321dp" />
 
-    <Button
-        android:id="@+id/btnVoldown"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="165dp"
-        android:layout_height="93dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
-        android:background="@android:color/holo_orange_dark"
-        android:text="Volume-"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCHdown" />
+        <Button
+            android:id="@+id/btnCHup"
+            android:layout_width="172dp"
+            android:layout_height="120dp"
+            android:layout_column="3"
+            android:layout_columnSpan="3"
+            android:layout_margin="3dp"
+            android:layout_row="0"
+            android:layout_rowSpan="1"
+            android:background="@color/carrot"
+            android:text="CH+" />
 
-    <Button
-        android:id="@+id/btnVolup"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="165dp"
-        android:layout_height="94dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:background="@android:color/holo_orange_dark"
-        android:text="Volume+"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCHup" />
+        <Button
+            android:id="@+id/btnVolDown"
+            android:layout_width="172dp"
+            android:layout_height="120dp"
+            android:layout_column="0"
+            android:layout_columnSpan="3"
+            android:layout_margin="3dp"
+            android:layout_row="1"
+            android:layout_rowSpan="1"
+            android:background="@color/carrot"
+            android:text="Vol-" />
 
-    <Button
-        android:id="@+id/btnChangeRatio"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="165dp"
-        android:layout_height="93dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:background="@android:color/holo_orange_dark"
-        android:text="Change Ratio"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnVoldown" />
+        <Button
+            android:id="@+id/btnVolUp"
+            android:layout_width="172dp"
+            android:layout_height="120dp"
+            android:layout_column="3"
+            android:layout_columnSpan="3"
+            android:layout_margin="3dp"
+            android:layout_row="1"
+            android:layout_rowSpan="1"
+            android:background="@color/carrot"
+            android:text="Vol+" />
 
-    <Button
-        android:id="@+id/btnPip"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="165dp"
-        android:layout_height="94dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:background="@android:color/holo_orange_dark"
-        android:text="Picture in Picture"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnVolup" />
+        <Button
+            android:id="@+id/btnChangeRatio"
+            android:layout_width="172dp"
+            android:layout_height="120dp"
+            android:layout_column="0"
+            android:layout_columnSpan="3"
+            android:layout_margin="3dp"
+            android:layout_row="2"
+            android:layout_rowSpan="1"
+            android:background="@color/carrot"
+            android:text="Change Aspect Ratio" />
 
-    <Button
-        android:id="@+id/btnPauseResume"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="100dp"
-        android:layout_height="93dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
-        android:background="@android:drawable/ic_media_play"
-        android:backgroundTint="@android:color/holo_orange_dark"
-        app:layout_constraintEnd_toStartOf="@+id/btnFastForward"
-        app:layout_constraintStart_toEndOf="@+id/btnRewind"
-        app:layout_constraintTop_toBottomOf="@+id/btnPip" />
+        <Button
+            android:id="@+id/btnPicInPic"
+            android:layout_width="172dp"
+            android:layout_height="120dp"
+            android:layout_column="3"
+            android:layout_columnSpan="3"
+            android:layout_margin="3dp"
+            android:layout_row="2"
+            android:layout_rowSpan="1"
+            android:background="@color/carrot"
+            android:text="Picture in Picture" />
 
-    <Button
-        android:id="@+id/btnFastForward"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="100dp"
-        android:layout_height="94dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="28dp"
-        android:background="@android:drawable/ic_media_ff"
-        android:backgroundTint="@android:color/holo_orange_dark"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnPip" />
+        <Button
+            android:id="@+id/btnRewind"
+            android:layout_width="112dp"
+            android:layout_height="100dp"
+            android:layout_column="0"
+            android:layout_columnSpan="2"
+            android:layout_margin="3dp"
+            android:layout_row="3"
+            android:background="@color/carrot"
+            android:text="Re" />
 
-    <Button
-        android:id="@+id/btnRewind"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="100dp"
-        android:layout_height="93dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
-        android:background="@android:drawable/ic_media_rew"
-        android:backgroundTint="@android:color/holo_orange_dark"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnChangeRatio" />
+        <Button
+            android:id="@+id/btnPlayPause"
+            android:layout_width="112dp"
+            android:layout_height="100dp"
+            android:layout_column="2"
+            android:layout_columnSpan="2"
+            android:layout_margin="3dp"
+            android:layout_row="3"
+            android:background="@color/carrot"
+            android:text="Play/Pause" />
+
+        <Button
+            android:id="@+id/btnFastForward"
+            android:layout_width="112dp"
+            android:layout_height="100dp"
+            android:layout_column="4"
+            android:layout_columnSpan="2"
+            android:layout_margin="3dp"
+            android:layout_row="3"
+            android:background="@color/carrot"
+            android:text="Fast Forward" />
+
+    </GridLayout>
 
 </android.support.constraint.ConstraintLayout>
