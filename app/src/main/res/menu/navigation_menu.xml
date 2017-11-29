@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_senderliste"
+        android:icon="@mipmap/ic_list_black_24dp"
+        android:title="Senderliste"/>
+    <item
+        android:icon="@mipmap/satellite"
+        android:id="@+id/nav_Kanalscan" android:title="Kanalscan"/>
+    <item
+        android:icon="@mipmap/painter_palette"
+        android:id="@+id/nav_Farbe" android:title="Farbe ändern"/>
+</menu>
