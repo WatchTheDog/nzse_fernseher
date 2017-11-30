@@ -33,7 +33,7 @@
             android:layout_width="54dp"
             android:layout_height="54dp"
             android:background="@drawable/ic_star_rate_white_18dp"
-            android:backgroundTint="?android:attr/colorPressedHighlight"
+            android:backgroundTint="#f39c12"
             android:baselineAligned="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -42,8 +42,8 @@
             android:id="@+id/btnMenu"
             android:layout_width="54dp"
             android:layout_height="54dp"
-            android:background="@drawable/ic_dehaze_white_18dp"
-            android:backgroundTint="@android:color/black"
+            android:background="@drawable/ic_menu_white_18dp"
+            android:backgroundTint="#f39c12"
             android:baselineAligned="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
