@@ -57,8 +57,9 @@
             android:layout_margin="3dp"
             android:layout_row="1"
             android:layout_rowSpan="1"
+            android:background="@drawable/ic_volume_down_white_24dp"
             android:backgroundTint="#f39c12"
-            android:text="Vol-" />
+            android:backgroundTintMode="add"/>
 
         <Button
             android:id="@+id/btnVolUp"
@@ -69,8 +70,9 @@
             android:layout_margin="3dp"
             android:layout_row="1"
             android:layout_rowSpan="1"
+            android:background="@drawable/ic_volume_up_white_24dp"
             android:backgroundTint="#f39c12"
-            android:text="Vol+" />
+            android:backgroundTintMode="add" />
 
         <Button
             android:id="@+id/btnChangeRatio"
@@ -81,8 +83,9 @@
             android:layout_margin="3dp"
             android:layout_row="2"
             android:layout_rowSpan="0"
+            android:background="@drawable/ic_aspect_ratio_white_24dp"
             android:backgroundTint="#f39c12"
-            android:text="Change Aspect Ratio" />
+            android:backgroundTintMode="add" />
 
         <Button
             android:id="@+id/btnPicInPic"
@@ -93,8 +96,9 @@
             android:layout_margin="3dp"
             android:layout_row="2"
             android:layout_rowSpan="1"
+            android:background="@drawable/ic_picture_in_picture_white_24dp"
             android:backgroundTint="#f39c12"
-            android:text="Picture in Picture" />
+            android:backgroundTintMode="add"/>
 
         <Button
             android:id="@+id/btnRewind"
@@ -104,7 +108,7 @@
             android:layout_columnSpan="2"
             android:layout_margin="3dp"
             android:layout_row="3"
-            android:background="@android:drawable/ic_media_rew"
+            android:background="@drawable/ic_fast_rewind_white_24dp"
             android:backgroundTint="#f39c12"
             android:backgroundTintMode="add" />
 
@@ -116,7 +120,7 @@
             android:layout_columnSpan="2"
             android:layout_margin="3dp"
             android:layout_row="3"
-            android:background="@android:drawable/ic_media_play"
+            android:background="@drawable/ic_play_arrow_white_24dp"
             android:backgroundTint="#f39c12"
             android:backgroundTintMode="add" />
 
@@ -128,7 +132,7 @@
             android:layout_columnSpan="2"
             android:layout_margin="3dp"
             android:layout_row="3"
-            android:background="@android:drawable/ic_media_ff"
+            android:background="@drawable/ic_fast_forward_white_24dp"
             android:backgroundTint="#f39c12"
             android:backgroundTintMode="add" />
 
