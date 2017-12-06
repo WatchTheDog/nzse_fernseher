@@ -22,7 +22,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
+        <ImageButton
             android:id="@+id/btnCHdown"
             android:layout_width="172dp"
             android:layout_height="120dp"
@@ -31,16 +31,17 @@
             android:layout_margin="3dp"
             android:layout_row="0"
             android:layout_rowSpan="17"
-            android:background="@drawable/ic_keyboard_arrow_down_white_18dp"
-            android:backgroundTint="#f39c12"
+            android:src="@drawable/ic_keyboard_arrow_down_white_18dp"
+            android:background="#f39c12"
             android:fontFamily="sans-serif"
             android:textColor="#ffffff"
+            android:scaleType="fitCenter"
+            android:padding="20dp"
             android:textSize="30dp"
             tools:layout_editor_absoluteX="116dp"
-            tools:layout_editor_absoluteY="321dp"
-            android:backgroundTintMode="add"/>
+            tools:layout_editor_absoluteY="321dp"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/btnCHup"
             android:layout_width="172dp"
             android:layout_height="120dp"
@@ -49,14 +50,14 @@
             android:layout_margin="3dp"
             android:layout_row="0"
             android:layout_rowSpan="1"
-            android:background="@drawable/ic_keyboard_arrow_up_white_18dp"
-            android:backgroundTint="#f39c12"
+            android:background="#f39c12"
             android:fontFamily="sans-serif"
-            android:textColor="#ffffff"
-            android:textSize="30dp"
-            android:backgroundTintMode="add"/>
+            android:scaleType="fitCenter"
+            android:padding="20dp"
+            android:src="@drawable/ic_keyboard_arrow_up_white_18dp"
+            android:textColor="#ffffff"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/btnVolDown"
             android:layout_width="172dp"
             android:layout_height="120dp"
@@ -65,11 +66,13 @@
             android:layout_margin="3dp"
             android:layout_row="1"
             android:layout_rowSpan="1"
-            android:background="@drawable/ic_volume_down_white_24dp"
-            android:backgroundTint="#f39c12"
-            android:backgroundTintMode="add"/>
+            android:background="#f39c12"
+            android:cropToPadding="false"
+            android:scaleType="fitCenter"
+            android:padding="20dp"
+            android:src="@drawable/ic_volume_down_white_24dp" />
 
-        <Button
+        <ImageButton
             android:id="@+id/btnVolUp"
             android:layout_width="172dp"
             android:layout_height="120dp"
@@ -78,11 +81,12 @@
             android:layout_margin="3dp"
             android:layout_row="1"
             android:layout_rowSpan="1"
-            android:background="@drawable/ic_volume_up_white_24dp"
-            android:backgroundTint="#f39c12"
-            android:backgroundTintMode="add" />
+            android:scaleType="fitCenter"
+            android:padding="20dp"
+            android:src="@drawable/ic_volume_up_white_24dp"
+            android:background="#f39c12" />
 
-        <Button
+        <ImageButton
             android:id="@+id/btnChangeRatio"
             android:layout_width="172dp"
             android:layout_height="120dp"
@@ -91,11 +95,12 @@
             android:layout_margin="3dp"
             android:layout_row="2"
             android:layout_rowSpan="0"
-            android:background="@drawable/ic_aspect_ratio_white_24dp"
-            android:backgroundTint="#f39c12"
-            android:backgroundTintMode="add" />
+            android:scaleType="fitCenter"
+            android:padding="20dp"
+            android:src="@drawable/ic_aspect_ratio_white_24dp"
+            android:background="#f39c12" />
 
-        <Button
+        <ImageButton
             android:id="@+id/btnPicInPic"
             android:layout_width="172dp"
             android:layout_height="120dp"
@@ -104,11 +109,12 @@
             android:layout_margin="3dp"
             android:layout_row="2"
             android:layout_rowSpan="1"
-            android:background="@drawable/ic_picture_in_picture_white_24dp"
-            android:backgroundTint="#f39c12"
-            android:backgroundTintMode="add"/>
+            android:scaleType="fitCenter"
+            android:padding="20dp"
+            android:src="@drawable/ic_picture_in_picture_white_24dp"
+            android:background="#f39c12"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/btnRewind"
             android:layout_width="112dp"
             android:layout_height="100dp"
@@ -116,11 +122,12 @@
             android:layout_columnSpan="2"
             android:layout_margin="3dp"
             android:layout_row="3"
-            android:background="@drawable/ic_fast_rewind_white_24dp"
-            android:backgroundTint="#f39c12"
-            android:backgroundTintMode="add" />
+            android:scaleType="fitCenter"
+            android:padding="20dp"
+            android:src="@drawable/ic_fast_rewind_white_24dp"
+            android:background="#f39c12" />
 
-        <Button
+        <ImageButton
             android:id="@+id/btnPlayPause"
             android:layout_width="112dp"
             android:layout_height="100dp"
@@ -128,11 +135,12 @@
             android:layout_columnSpan="2"
             android:layout_margin="3dp"
             android:layout_row="3"
-            android:background="@drawable/ic_play_arrow_white_24dp"
-            android:backgroundTint="#f39c12"
-            android:backgroundTintMode="add" />
+            android:scaleType="fitCenter"
+            android:padding="20dp"
+            android:src="@drawable/ic_play_arrow_white_24dp"
+            android:background="#f39c12" />
 
-        <Button
+        <ImageButton
             android:id="@+id/btnFastForward"
             android:layout_width="112dp"
             android:layout_height="100dp"
@@ -140,9 +148,10 @@
             android:layout_columnSpan="2"
             android:layout_margin="3dp"
             android:layout_row="3"
-            android:background="@drawable/ic_fast_forward_white_24dp"
-            android:backgroundTint="#f39c12"
-            android:backgroundTintMode="add" />
+            android:scaleType="fitCenter"
+            android:padding="20dp"
+            android:src="@drawable/ic_fast_forward_white_24dp"
+            android:background="#f39c12"/>
 
     </GridLayout>
 
