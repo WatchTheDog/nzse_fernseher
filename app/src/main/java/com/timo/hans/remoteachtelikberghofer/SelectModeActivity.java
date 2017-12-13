@@ -1,6 +1,8 @@
 package com.timo.hans.remoteachtelikberghofer;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -18,8 +20,19 @@ public class SelectModeActivity extends AppCompatActivity {
         setContentView(R.layout.pick_mode);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
+        SharedPreferences pref = getSharedPreferences("ActivityPREF", Context.MODE_PRIVATE);
+        if(pref.getBoolean("select_executed", false)){
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            SharedPreferences.Editor ed = pref.edit();
+            ed.putBoolean("select_executed", true);
+            ed.commit();
+        }
+
     }
-    public void showMainView(View view){
+       public void showMainView(View view){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
