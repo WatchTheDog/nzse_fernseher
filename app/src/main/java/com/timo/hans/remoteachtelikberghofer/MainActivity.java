@@ -1,5 +1,7 @@
 package com.timo.hans.remoteachtelikberghofer;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +14,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import org.json.*;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<String> mAdapter;
     private ActionBarDrawerToggle mDrawerToggle;
     private String mActivityTitle;
-
+    private HttpRequest TV = new HttpRequest("192.168.178.21", 30000, true);
+    private SharedPreferences prefMain;
     public MainActivity() {
     }
 
@@ -30,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        prefMain = getSharedPreferences("MainActivityPREF", Context.MODE_PRIVATE);
         Log.i("RemoteAchtelikBerghofer", "onCreate: ");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -42,13 +53,47 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         mActivityTitle = getTitle().toString();
         setupDrawer();
+        ChannelScan();
     }
     /** @brief wird beim Klicken auf Hello World ausgeführt.
-     *
-     * @param v
+     *     * @param v
      */
     public void onHelloWorldClick (View v) {
         Log.i("RemoteAchtelikBerghofer", "onHelloWorldClick: ");
+    }
+
+    public void ChannelScan() {
+        try {
+            JSONObject channelsjson;
+            channelsjson = TV.execute("scanChannels=");
+            String[] arr = channelsjson.toString().replace("}],\"status\":\"ok\"}", " ")
+                    .replace("{", " ")
+                    .replace("\"channels\":[ ", " ")
+                    .split("\\},");
+            SharedPreferences.Editor ed = prefMain.edit();
+            ed.putInt("ArraySize", arr.length);
+            for (int i = 0; i < arr.length; i++) {
+                ed.putString("Kanal"+i,arr[i]);
+            }
+            ed.commit();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String ReadChannel(int num) {
+        return prefMain.getString("Kanal"+num,null);
+    }
+
+    public ArrayList<String> ReadChannels() {
+        int size = prefMain.getInt("ArraySize",0);
+        ArrayList value = new ArrayList<String>(size);
+        for (int i = 0; i < size; i++) {
+            value.add(prefMain.getString("Kanal" + i, null));
+        }
+        return value;
     }
 
     private void setupDrawer() {
