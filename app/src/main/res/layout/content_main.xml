@@ -68,8 +68,9 @@
             android:layout_rowSpan="1"
             android:background="#f39c12"
             android:cropToPadding="false"
-            android:scaleType="fitCenter"
+            android:onClick="DecreaseVol"
             android:padding="20dp"
+            android:scaleType="fitCenter"
             android:src="@drawable/ic_volume_down_white_24dp" />
 
         <ImageButton
@@ -81,10 +82,11 @@
             android:layout_margin="3dp"
             android:layout_row="0"
             android:layout_rowSpan="1"
-            android:scaleType="fitCenter"
+            android:background="#f39c12"
+            android:onClick="IncreaseVol"
             android:padding="20dp"
-            android:src="@drawable/ic_volume_up_white_24dp"
-            android:background="#f39c12" />
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_volume_up_white_24dp" />
 
         <ImageButton
             android:id="@+id/btnChangeRatio"
@@ -95,10 +97,11 @@
             android:layout_margin="3dp"
             android:layout_row="2"
             android:layout_rowSpan="0"
-            android:scaleType="fitCenter"
+            android:background="#f39c12"
+            android:onClick="Zoom"
             android:padding="20dp"
-            android:src="@drawable/ic_aspect_ratio_white_24dp"
-            android:background="#f39c12" />
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_aspect_ratio_white_24dp" />
 
         <ImageButton
             android:id="@+id/btnPicInPic"

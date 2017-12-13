@@ -29,8 +29,10 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<String> mAdapter;
     private ActionBarDrawerToggle mDrawerToggle;
     private String mActivityTitle;
-    private HttpRequest TV = new HttpRequest("192.168.178.21", 30000, true);
+    private HttpRequest TV = new HttpRequest("192.168.178.39", 30000, true);
     private SharedPreferences prefMain;
+    private int vol=20;
+    private boolean zoomed = false;
     public MainActivity() {
     }
 
@@ -77,6 +79,43 @@ public class MainActivity extends AppCompatActivity {
             }
             ed.commit();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void IncreaseVol(View v){
+        vol++;
+        String tmp="volume=" + vol;
+        execute(tmp);
+    }
+
+    public void DecreaseVol(View v){
+        vol--;
+        String tmp="volume=" + vol;
+        execute(tmp);
+      }
+
+    public void Zoom(View v){
+        String tmp="";
+        if(!zoomed){
+            tmp="zoomPip=1";
+            zoomed=true;
+        }
+        else{
+            tmp="zoomPip=0";
+            zoomed=false;
+        }
+        execute(tmp);
+    }
+
+    public void execute(String command){
+        try{
+            JSONObject channelsjson;
+            channelsjson = TV.execute(command);
+        }
+        catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
