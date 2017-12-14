@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         mActivityTitle = getTitle().toString();
         setupDrawer();
+        Requester = new HttpRequestHandler();
         Requester.ChannelScan();
     }
     /** @brief wird beim Klicken auf Hello World ausgeführt.
