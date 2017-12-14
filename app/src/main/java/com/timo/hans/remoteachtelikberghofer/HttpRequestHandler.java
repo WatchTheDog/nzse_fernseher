@@ -45,12 +45,19 @@ import java.util.ArrayList;
 public class HttpRequestHandler {
     private SharedPreferences prefMain;
     private int vol=20;
+    private int CH=0;
     private boolean zoomed = false;
+    private boolean pip = false;
     private HttpRequest TV;
+    private ArrayList<String> list = new ArrayList<String>();
 
     public HttpRequestHandler(Context context) {
-        TV = new HttpRequest("192.168.178.21",5000, true);
+        TV = new HttpRequest("192.168.178.39",5000, true);
         prefMain = context.getSharedPreferences("HttpRequestHandlerPREF", Context.MODE_PRIVATE);
+        list.add("8a");
+        list.add("8b");
+        list.add("22c");
+        list.add("37c");
     }
 
     public String ReadChannel(int num) {
@@ -112,5 +119,37 @@ public class HttpRequestHandler {
 
     public void setZoomed(boolean zoomed) {
         this.zoomed = zoomed;
+    }
+
+    public boolean ispip() {
+        return pip;
+    }
+
+    public void setpip(boolean pip) {
+        this.pip = pip;
+    }
+
+    public String getCH() {
+        return list.get(CH);
+    }
+
+    public void setCH(boolean direction) {
+        if(direction){
+            if(this.CH >= list.size()-1){
+                this.CH=0;
+            }
+            else{
+                this.CH++;
+            }
+        }
+        else{
+            if(this.CH <= 0){
+                this.CH=list.size()-1;
+            }
+            else{
+                this.CH--;
+            }
+        }
+
     }
 }

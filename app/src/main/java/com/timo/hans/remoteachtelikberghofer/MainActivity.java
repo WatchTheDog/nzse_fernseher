@@ -13,7 +13,11 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import org.json.*;
 
 import java.io.IOException;
@@ -29,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<String> mAdapter;
     private ActionBarDrawerToggle mDrawerToggle;
     private String mActivityTitle;
+    private ImageButton pip;
+    private Boolean longclick=false;
     public MainActivity() {
     }
 
@@ -41,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         Log.i("RemoteAchtelikBerghofer", "onCreate: ");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        pip = (ImageButton)findViewById(R.id.btnPicInPic);
         mDrawerList = (ListView)findViewById(R.id.navList);
         addDrawerItems();
         Toolbar t = (Toolbar) findViewById(R.id.toolbar);
@@ -52,7 +59,28 @@ public class MainActivity extends AppCompatActivity {
         setupDrawer();
         Requester = new HttpRequestHandler(this);
         Requester.ChannelScan();
+        pip.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                piplongclick();
+                return true;
+            }
+        });
     }
+
+    private void piplongclick() {
+        Toast toast;
+        if(longclick){
+            longclick=false;
+            toast = Toast.makeText(this, "PIP navigation deactivated", Toast.LENGTH_LONG);
+        }
+        else {
+            longclick = true;
+            toast = Toast.makeText(this, "PIP navigation activated", Toast.LENGTH_LONG);
+        }
+        toast.show();
+    }
+
     /** @brief wird beim Klicken auf Hello World ausgeführt.
      *     * @param v
      */
@@ -73,14 +101,69 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Zoom(View v){
-        String tmp="";
-        if(!Requester.isZoomed()){
-            tmp="zoomPip=1";
-            Requester.setZoomed(true);
+        if(!longclick) {
+            String tmp = "";
+            if (!Requester.isZoomed()) {
+                tmp = "zoomMain=1";
+                Requester.setZoomed(true);
+            } else {
+                tmp = "zoomMain=0";
+                Requester.setZoomed(false);
+            }
+            Requester.executeCmd(tmp);
         }
         else{
-            tmp="zoomPip=0";
-            Requester.setZoomed(false);
+            String tmp = "";
+            if (!Requester.isZoomed()) {
+                tmp = "zoomPip=1";
+                Requester.setZoomed(true);
+            } else {
+                tmp = "zoomPip=0";
+                Requester.setZoomed(false);
+            }
+            Requester.executeCmd(tmp);
+        }
+    }
+
+    public void switchChannelUp(View v){
+        if(!longclick) {
+            Requester.setCH(true);
+            String tmp = "channelMain=" + Requester.getCH();
+            Requester.executeCmd(tmp);
+        }
+        else{
+            Requester.setCH(true);
+            String tmp = "channelPip=" + Requester.getCH();
+            Requester.executeCmd(tmp);
+        }
+    }
+
+    public void switchChannelDown(View v){
+        if(!longclick) {
+            Requester.setCH(false);
+            String tmp = "channelMain=" + Requester.getCH();
+            Requester.executeCmd(tmp);
+        }
+        else{
+            Requester.setCH(false);
+            String tmp = "channelPip=" + Requester.getCH();
+            Requester.executeCmd(tmp);
+        }
+    }
+
+    public void PIP(View v){
+        String tmp="";
+        if(!Requester.ispip()){
+            tmp="showPip=1";
+            Requester.setpip(true);
+        }
+        else{
+            tmp="showPip=0";
+            Requester.setpip(false);
+            longclick=false;
+            Toast toast;
+            toast = Toast.makeText(this, "PIP navigation deactivated", Toast.LENGTH_LONG);
+            toast.show();
         }
         Requester.executeCmd(tmp);
     }
