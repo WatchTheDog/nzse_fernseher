@@ -23,16 +23,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
-
+    private HttpRequestHandler Requester;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ArrayAdapter<String> mAdapter;
     private ActionBarDrawerToggle mDrawerToggle;
     private String mActivityTitle;
-    private HttpRequest TV = new HttpRequest("192.168.178.39", 30000, true);
-    private SharedPreferences prefMain;
-    private int vol=20;
-    private boolean zoomed = false;
     public MainActivity() {
     }
 
@@ -42,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        prefMain = getSharedPreferences("MainActivityPREF", Context.MODE_PRIVATE);
         Log.i("RemoteAchtelikBerghofer", "onCreate: ");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -55,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         mActivityTitle = getTitle().toString();
         setupDrawer();
-        ChannelScan();
+        Requester.ChannelScan();
     }
     /** @brief wird beim Klicken auf Hello World ausgeführt.
      *     * @param v
@@ -64,75 +59,29 @@ public class MainActivity extends AppCompatActivity {
         Log.i("RemoteAchtelikBerghofer", "onHelloWorldClick: ");
     }
 
-    public void ChannelScan() {
-        try {
-            JSONObject channelsjson;
-            channelsjson = TV.execute("scanChannels=");
-            String[] arr = channelsjson.toString().replace("}],\"status\":\"ok\"}", " ")
-                    .replace("{", " ")
-                    .replace("\"channels\":[ ", " ")
-                    .split("\\},");
-            SharedPreferences.Editor ed = prefMain.edit();
-            ed.putInt("ArraySize", arr.length);
-            for (int i = 0; i < arr.length; i++) {
-                ed.putString("Kanal"+i,arr[i]);
-            }
-            ed.commit();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void IncreaseVol(View v){
-        vol++;
-        String tmp="volume=" + vol;
-        execute(tmp);
+        Requester.setVol(Requester.getVol()+1);
+        String tmp="volume=" + Requester.getVol();
+        Requester.executeCmd(tmp);
     }
 
     public void DecreaseVol(View v){
-        vol--;
-        String tmp="volume=" + vol;
-        execute(tmp);
-      }
+        Requester.setVol(Requester.getVol()-1);
+        String tmp="volume=" + Requester.getVol();
+        Requester.executeCmd(tmp);
+    }
 
     public void Zoom(View v){
         String tmp="";
-        if(!zoomed){
+        if(!Requester.isZoomed()){
             tmp="zoomPip=1";
-            zoomed=true;
+            Requester.setZoomed(true);
         }
         else{
             tmp="zoomPip=0";
-            zoomed=false;
+            Requester.setZoomed(false);
         }
-        execute(tmp);
-    }
-
-    public void execute(String command){
-        try{
-            JSONObject channelsjson;
-            channelsjson = TV.execute(command);
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public String ReadChannel(int num) {
-        return prefMain.getString("Kanal"+num,null);
-    }
-
-    public ArrayList<String> ReadChannels() {
-        int size = prefMain.getInt("ArraySize",0);
-        ArrayList value = new ArrayList<String>(size);
-        for (int i = 0; i < size; i++) {
-            value.add(prefMain.getString("Kanal" + i, null));
-        }
-        return value;
+        Requester.executeCmd(tmp);
     }
 
     private void setupDrawer() {
