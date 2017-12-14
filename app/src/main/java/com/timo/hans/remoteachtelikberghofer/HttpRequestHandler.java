@@ -21,7 +21,7 @@ public class HttpRequestHandler {
     private HttpRequest TV;
 
     public HttpRequestHandler() {
-        prefMain = getSharedPreferences();
+        prefMain = getSharedPreferences("HttpRequestHandlerPREF", Context.MODE_PRIVATE);
         TV = new HttpRequest("192.168.178.21",5000);
     }
 
