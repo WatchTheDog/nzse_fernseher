@@ -102,15 +102,14 @@ public class HttpRequestHandler {
         for (int i = 0; i < size; i++) {
             value.add(prefMain.getString("Kanal" + i, null));
         }
-        setChannel("");
         return value;
     }
 
     public void setChannel(String channel) {
         if (isPIP())
-            executeCmd("channelPip=8a");
+            executeCmd("channelPip"+channel);
         else
-            executeCmd("channelMain=8b");
+            executeCmd("channelMain="+channel);
     }
 
     public String getChannel(String name) {
