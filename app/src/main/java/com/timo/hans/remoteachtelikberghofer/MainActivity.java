@@ -127,39 +127,43 @@ public class MainActivity extends AppCompatActivity {
 
     public void switchChannelUp(View v){
         if(!longclick) {
-            Requester.setCH(true);
-            String tmp = "channelMain=" + Requester.getCH();
+            Requester.setCH(Requester.getCH()+1);
+            Requester.checkMax();
+            String tmp = "channelMain=" + Requester.getCHNmb(Requester.getCH());
             Requester.executeCmd(tmp);
         }
         else{
-            Requester.setCH(true);
-            String tmp = "channelPip=" + Requester.getCH();
+            Requester.setCHPip(Requester.getCHPip()+1);
+            Requester.checkMax();
+            String tmp = "channelPip=" + Requester.getCHNmb(Requester.getCHPip());
             Requester.executeCmd(tmp);
         }
     }
 
     public void switchChannelDown(View v){
         if(!longclick) {
-            Requester.setCH(false);
-            String tmp = "channelMain=" + Requester.getCH();
+            Requester.setCH(Requester.getCH()-1);
+            Requester.checkZero();
+            String tmp = "channelMain=" + Requester.getCHNmb(Requester.getCH());
             Requester.executeCmd(tmp);
         }
         else{
-            Requester.setCH(false);
-            String tmp = "channelPip=" + Requester.getCH();
+            Requester.setCHPip(Requester.getCHPip()-1);
+            Requester.checkZero();
+            String tmp = "channelPip=" + Requester.getCHNmb(Requester.getCHPip());
             Requester.executeCmd(tmp);
         }
     }
 
     public void PIP(View v){
         String tmp="";
-        if(!Requester.ispip()){
+        if(!Requester.isPIP()){
             tmp="showPip=1";
-            Requester.setpip(true);
+            Requester.setPIP(true);
         }
         else{
             tmp="showPip=0";
-            Requester.setpip(false);
+            Requester.setPIP(false);
             longclick=false;
             Toast toast;
             toast = Toast.makeText(this, "PIP navigation deactivated", Toast.LENGTH_LONG);
