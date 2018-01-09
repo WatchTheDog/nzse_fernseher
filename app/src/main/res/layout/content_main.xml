@@ -9,14 +9,13 @@
     tools:showIn="@layout/activity_main">
 
     <GridLayout
-        android:layout_width="358dp"
-        android:layout_height="510dp"
+        android:id="@+id/GridLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:padding="1dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
+        android:paddingTop="47dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +33,7 @@
             android:background="#f39c12"
             android:fontFamily="sans-serif"
             android:onClick="switchChannelDown"
-            android:padding="20dp"
+            android:padding="30dp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_keyboard_arrow_down_white_18dp"
             android:textColor="#ffffff"
@@ -54,7 +53,7 @@
             android:background="#f39c12"
             android:fontFamily="sans-serif"
             android:onClick="switchChannelUp"
-            android:padding="20dp"
+            android:padding="30dp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_keyboard_arrow_up_white_18dp"
             android:textColor="#ffffff" />
@@ -71,7 +70,7 @@
             android:background="#f39c12"
             android:cropToPadding="false"
             android:onClick="DecreaseVol"
-            android:padding="20dp"
+            android:padding="30dp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_volume_down_white_24dp" />
 
@@ -86,7 +85,7 @@
             android:layout_rowSpan="1"
             android:background="#f39c12"
             android:onClick="IncreaseVol"
-            android:padding="20dp"
+            android:padding="30dp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_volume_up_white_24dp" />
 
@@ -101,7 +100,7 @@
             android:layout_rowSpan="0"
             android:background="#f39c12"
             android:onClick="Zoom"
-            android:padding="20dp"
+            android:padding="30dp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_aspect_ratio_white_24dp" />
 
@@ -116,7 +115,7 @@
             android:layout_rowSpan="1"
             android:background="#f39c12"
             android:onClick="PIP"
-            android:padding="20dp"
+            android:padding="30dp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_picture_in_picture_white_24dp" />
 
@@ -128,10 +127,10 @@
             android:layout_columnSpan="2"
             android:layout_margin="3dp"
             android:layout_row="3"
+            android:background="#f39c12"
+            android:padding="30dp"
             android:scaleType="fitCenter"
-            android:padding="20dp"
-            android:src="@drawable/ic_fast_rewind_white_24dp"
-            android:background="#f39c12" />
+            android:src="@drawable/ic_fast_rewind_white_24dp" />
 
         <ImageButton
             android:id="@+id/btnPlayPause"
@@ -141,10 +140,10 @@
             android:layout_columnSpan="2"
             android:layout_margin="3dp"
             android:layout_row="3"
+            android:background="#f39c12"
+            android:padding="30dp"
             android:scaleType="fitCenter"
-            android:padding="20dp"
-            android:src="@drawable/ic_play_arrow_white_24dp"
-            android:background="#f39c12" />
+            android:src="@drawable/ic_play_arrow_white_24dp" />
 
         <ImageButton
             android:id="@+id/btnFastForward"
@@ -154,10 +153,10 @@
             android:layout_columnSpan="2"
             android:layout_margin="3dp"
             android:layout_row="3"
+            android:background="#f39c12"
+            android:padding="30dp"
             android:scaleType="fitCenter"
-            android:padding="20dp"
-            android:src="@drawable/ic_fast_forward_white_24dp"
-            android:background="#f39c12"/>
+            android:src="@drawable/ic_fast_forward_white_24dp" />
 
     </GridLayout>
 

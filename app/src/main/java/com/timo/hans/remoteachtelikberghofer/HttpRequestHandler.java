@@ -1,42 +1,13 @@
 package com.timo.hans.remoteachtelikberghofer;
 
-import android.content.BroadcastReceiver;
-import android.content.ComponentName;
-import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.IntentSender;
-import android.content.ServiceConnection;
 import android.content.SharedPreferences;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.content.res.AssetManager;
-import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.database.DatabaseErrorHandler;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.UserHandle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Log;
-import android.view.Display;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
@@ -46,7 +17,9 @@ import java.util.ArrayList;
 public class HttpRequestHandler {
     private SharedPreferences prefMain;
     private int vol = 20;
-    String[] arr;
+    private String[] arr;
+    private String[] arrChannel;
+    private String[] arrChannelNumber;
     private int CH = 0;
     private int CHPip = 0;
     private boolean isPIP = false;
@@ -72,8 +45,8 @@ public class HttpRequestHandler {
                     .replace("\"channels\":[ ", " ")
                     .split("\\},");
             SharedPreferences.Editor ed = prefMain.edit();
-            ed.putInt("ArraySize", arr.length);
-            for (int i = 0; i < arr.length; i++) {
+            ed.putInt("ArraySize", getArrSize());
+            for (int i = 0; i < getArrSize(); i++) {
                 ed.putString("Kanal" + i, arr[i]);
             }
             ed.commit();
@@ -82,7 +55,16 @@ public class HttpRequestHandler {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.i("Kek", getCHNmb(5));
+        CleanArr();
+    }
+
+    public void CleanArr() {
+        arrChannel = new String[getArrSize()];
+        arrChannelNumber = new String[getArrSize()];
+        for (int i= 0; i < getArrSize(); i++) {
+            arrChannelNumber[i] = getCHNmb(i);
+            arrChannel[i] = getChannel(i);
+        }
     }
 
     public void executeCmd(String command) {
@@ -112,12 +94,9 @@ public class HttpRequestHandler {
             executeCmd("channelMain="+channel);
     }
 
-    public String getChannel(String name) {
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i].contains(name))
-                return arr[i];
-        }
-        return null;
+    public String getChannel(int i) {
+        String tmp = arr[i].substring(arr[i].indexOf("\"program\":")+11);
+        return tmp.substring(0, tmp.indexOf("\""));
     }
 
     public String getCHNmb(int i) {
@@ -127,15 +106,15 @@ public class HttpRequestHandler {
 
     public void checkZero() {
         if (CH < 0)
-            setCH(arr.length-1);
+            setCH(getArrSize()-1);
         if (CHPip < 0)
-            setCHPip(arr.length-1);
+            setCHPip(getArrSize()-1);
     }
 
     public void checkMax() {
-        if (CH >= arr.length)
+        if (CH >= getArrSize())
             setCH(0);
-        if (CHPip >= arr.length)
+        if (CHPip >= getArrSize())
             setCHPip(0);
     }
 
@@ -175,5 +154,15 @@ public class HttpRequestHandler {
 
     public void setCHPip(int CHPip) {
         this.CHPip = CHPip;
+    }
+
+    public String[] getArrCh() {
+        String[] tmp = arrChannel;
+        return tmp;
+    }
+
+    public int getArrSize() {
+        int tmp = arr.length;
+        return tmp;
     }
 }
