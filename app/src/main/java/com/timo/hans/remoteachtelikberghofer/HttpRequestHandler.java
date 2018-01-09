@@ -40,31 +40,34 @@ public class HttpRequestHandler {
         try {
             JSONObject channelsjson;
             channelsjson = TV.execute("scanChannels=");
-            arr = channelsjson.toString().replace("}],\"status\":\"ok\"}", " ")
-                    .replace("{", " ")
-                    .replace("\"channels\":[ ", " ")
-                    .split("\\},");
-            SharedPreferences.Editor ed = prefMain.edit();
-            ed.putInt("ArraySize", getArrSize());
-            for (int i = 0; i < getArrSize(); i++) {
-                ed.putString("Kanal" + i, arr[i]);
+                Log.i("NichtNullJson","diese");
+                arr = channelsjson.toString().replace("}],\"status\":\"ok\"}", " ")
+                        .replace("{", " ")
+                        .replace("\"channels\":[ ", " ")
+                        .split("\\},");
+                SharedPreferences.Editor ed = prefMain.edit();
+                ed.putInt("ArraySize", getArrSize());
+                for (int i = 0; i < getArrSize(); i++) {
+                    ed.putString("Kanal" + i, arr[i]);
+                }
+                ed.commit();
+            } catch(IOException e){
+                e.printStackTrace();
+                arr = ReadChannels().toArray(new String[0]);
+            } catch(JSONException e){
+                e.printStackTrace();
             }
-            ed.commit();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        CleanArr();
+        if (arr != null)
+            CleanArr();
     }
 
     public void CleanArr() {
-        arrChannel = new String[getArrSize()];
-        arrChannelNumber = new String[getArrSize()];
-        for (int i= 0; i < getArrSize(); i++) {
-            arrChannelNumber[i] = getCHNmb(i);
-            arrChannel[i] = getChannel(i);
-        }
+            arrChannel = new String[getArrSize()];
+            arrChannelNumber = new String[getArrSize()];
+            for (int i = 0; i < getArrSize(); i++) {
+                arrChannelNumber[i] = getCHNmb(i);
+                arrChannel[i] = getChannel(i);
+            }
     }
 
     public void executeCmd(String command) {
@@ -158,6 +161,11 @@ public class HttpRequestHandler {
 
     public String[] getArrCh() {
         String[] tmp = arrChannel;
+        return tmp;
+    }
+
+    public String[] getArr() {
+        String[] tmp = arr;
         return tmp;
     }
 

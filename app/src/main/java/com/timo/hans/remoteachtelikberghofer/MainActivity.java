@@ -215,9 +215,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addDrawerItems() {
-        String[] arr = Requester.getArrCh();
-        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arr);
-        mDrawerList.setAdapter(mAdapter);
+        if (Requester.getArr() != null) {
+            String[] arr = Requester.getArrCh();
+            mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arr);
+            mDrawerList.setAdapter(mAdapter);
+        }
     }
 
     private void GridSetup() {
