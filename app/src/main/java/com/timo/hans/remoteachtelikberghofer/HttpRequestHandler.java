@@ -40,10 +40,10 @@ public class HttpRequestHandler {
         try {
             JSONObject channelsjson;
             channelsjson = TV.execute("scanChannels=");
-                Log.i("NichtNullJson","diese");
                 arr = channelsjson.toString().replace("}],\"status\":\"ok\"}", " ")
                         .replace("{", " ")
                         .replace("\"channels\":[ ", " ")
+                        .replace("\\"+"/","/")
                         .split("\\},");
                 SharedPreferences.Editor ed = prefMain.edit();
                 ed.putInt("ArraySize", getArrSize());
