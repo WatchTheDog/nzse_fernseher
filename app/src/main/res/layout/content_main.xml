@@ -35,7 +35,7 @@
             android:onClick="switchChannelDown"
             android:padding="30dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_keyboard_arrow_down_white_18dp"
+            android:src="@drawable/ic_keyboard_arrow_down_white_48dp"
             android:textColor="#ffffff"
             android:textSize="30dp"
             tools:layout_editor_absoluteX="116dp"
@@ -55,7 +55,7 @@
             android:onClick="switchChannelUp"
             android:padding="30dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_keyboard_arrow_up_white_18dp"
+            android:src="@drawable/ic_keyboard_arrow_up_white_48dp"
             android:textColor="#ffffff" />
 
         <ImageButton
@@ -72,7 +72,7 @@
             android:onClick="DecreaseVol"
             android:padding="30dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_volume_down_white_24dp" />
+            android:src="@drawable/ic_volume_down_white_48dp" />
 
         <ImageButton
             android:id="@+id/btnVolUp"
@@ -87,7 +87,7 @@
             android:onClick="IncreaseVol"
             android:padding="30dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_volume_up_white_24dp" />
+            android:src="@drawable/ic_volume_up_white_48dp" />
 
         <ImageButton
             android:id="@+id/btnChangeRatio"
@@ -102,7 +102,7 @@
             android:onClick="Zoom"
             android:padding="30dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_aspect_ratio_white_24dp" />
+            android:src="@drawable/ic_aspect_ratio_white_48dp" />
 
         <ImageButton
             android:id="@+id/btnPicInPic"
@@ -117,7 +117,7 @@
             android:onClick="PIP"
             android:padding="30dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_picture_in_picture_white_24dp" />
+            android:src="@drawable/ic_picture_in_picture_white_48dp" />
 
         <ImageButton
             android:id="@+id/btnRewind"
@@ -130,7 +130,7 @@
             android:background="#308774"
             android:padding="30dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_fast_rewind_white_24dp" />
+            android:src="@drawable/ic_fast_rewind_white_48dp" />
 
         <ImageButton
             android:id="@+id/btnPlayPause"
@@ -143,7 +143,7 @@
             android:background="#308774"
             android:padding="30dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_play_arrow_white_24dp" />
+            android:src="@drawable/ic_play_arrow_white_48dp" />
 
         <ImageButton
             android:id="@+id/btnFastForward"
@@ -156,7 +156,7 @@
             android:background="#308774"
             android:padding="30dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_fast_forward_white_24dp" />
+            android:src="@drawable/ic_fast_forward_white_48dp" />
 
     </GridLayout>
 

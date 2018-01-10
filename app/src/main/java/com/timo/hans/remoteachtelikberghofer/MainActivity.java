@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         display = ((android.view.WindowManager)getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         pip = (ImageButton)findViewById(R.id.btnPicInPic);
         Toolbar t = (Toolbar) findViewById(R.id.toolbar);
-        t.setNavigationIcon(R.drawable.ic_menu_white_18dp);
+        t.setNavigationIcon(R.drawable.ic_menu_white_36dp);
         GridSetup();
         setSupportActionBar(t);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

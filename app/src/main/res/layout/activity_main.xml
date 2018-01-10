@@ -31,7 +31,7 @@
             android:id="@+id/btnFavs"
             android:layout_width="54dp"
             android:layout_height="54dp"
-            android:src="@drawable/ic_star_rate_white_18dp"
+            android:src="@drawable/ic_star_white_36dp"
             android:background="@null"
             android:baselineAligned="true"
             android:scaleType="fitCenter"
