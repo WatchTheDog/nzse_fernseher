@@ -90,15 +90,12 @@ public class MainActivity extends AppCompatActivity {
         Toast toast;
         if(longclick){
             longclick=false;
-            toast = Toast.makeText(this, "PIP navigation deactivated", Toast.LENGTH_LONG);
             Pip.setBackgroundColor(Color.parseColor("#308774"));
         }
         else {
             longclick = true;
-            toast = Toast.makeText(this, "PIP navigation activated", Toast.LENGTH_LONG);
             Pip.setBackgroundColor(Color.parseColor("#236355"));
         }
-        toast.show();
     }
 
     /** @brief wird beim Klicken auf Hello World ausgeführt.
