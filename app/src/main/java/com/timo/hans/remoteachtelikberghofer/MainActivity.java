@@ -1,8 +1,10 @@
 package com.timo.hans.remoteachtelikberghofer;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -20,6 +22,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridLayout;
+import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -42,18 +45,9 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<String> mAdapter;
     private ActionBarDrawerToggle mDrawerToggle;
     private String mActivityTitle;
-    private ImageButton pip;
+    private ImageButton Pip;
     private Boolean longclick=false;
     private android.view.Display display;
-    ImageButton VolUp;
-    ImageButton VolDown;
-    ImageButton ChUp;
-    ImageButton ChDown;
-    ImageButton Pip ;
-    ImageButton Ratio;
-    ImageButton Rewind;
-    ImageButton PlayPause;
-    ImageButton FastForward;
 
     public MainActivity() {
     }
@@ -70,7 +64,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         display = ((android.view.WindowManager)getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-        pip = (ImageButton)findViewById(R.id.btnPicInPic);
+        Pip = (ImageButton)findViewById(R.id.btnPicInPic);
+        grid = findViewById(R.id.GridLayout);
         Toolbar t = (Toolbar) findViewById(R.id.toolbar);
         t.setNavigationIcon(R.drawable.ic_menu_white_36dp);
         GridSetup();
@@ -80,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         mActivityTitle = getTitle().toString();
         setupDrawer();
-        pip.setOnLongClickListener(new View.OnLongClickListener() {
+        Pip.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 piplongclick();
@@ -96,10 +91,12 @@ public class MainActivity extends AppCompatActivity {
         if(longclick){
             longclick=false;
             toast = Toast.makeText(this, "PIP navigation deactivated", Toast.LENGTH_LONG);
+            Pip.setBackgroundColor(Color.parseColor("#308774"));
         }
         else {
             longclick = true;
             toast = Toast.makeText(this, "PIP navigation activated", Toast.LENGTH_LONG);
+            Pip.setBackgroundColor(Color.parseColor("#236355"));
         }
         toast.show();
     }
@@ -223,16 +220,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void GridSetup() {
-        VolUp = findViewById(R.id.btnVolUp);
-        VolDown = findViewById(R.id.btnVolDown);
-        ChUp = findViewById(R.id.btnCHup);
-        ChDown = findViewById(R.id.btnCHdown);
-        Pip = findViewById(R.id.btnPicInPic);
-        Ratio = findViewById(R.id.btnChangeRatio);
-        Rewind = findViewById(R.id.btnRewind);
-        PlayPause = findViewById(R.id.btnPlayPause);
-        FastForward = findViewById(R.id.btnFastForward);
-        grid = (GridLayout)findViewById(R.id.GridLayout);
+        ImageButton VolUp = findViewById(R.id.btnVolUp);
+        ImageButton VolDown = findViewById(R.id.btnVolDown);
+        ImageButton ChUp = findViewById(R.id.btnCHup);
+        ImageButton ChDown = findViewById(R.id.btnCHdown);
+        ImageButton Ratio = findViewById(R.id.btnChangeRatio);
+        ImageButton Rewind = findViewById(R.id.btnRewind);
+        ImageButton PlayPause = findViewById(R.id.btnPlayPause);
+        ImageButton FastForward = findViewById(R.id.btnFastForward);
         LayoutParams layoutParams = grid.getLayoutParams();
         layoutParams.height = ((int)(display.getHeight()*0.92));
         layoutParams.width = ((int)(display.getWidth()*0.965));
