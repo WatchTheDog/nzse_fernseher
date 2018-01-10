@@ -137,8 +137,10 @@ public class HttpRequestHandler {
         ArrayList valuequal = new ArrayList<Integer>(sizename);
         ArrayList valuefav = new ArrayList<String>(sizename);
 
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++)
             value.add(prefMain.getString("Kanal" + i, null));
+
+        for (int i = 0; i < sizename; i++) {
             valuename.add(prefMain.getString("KanalName" + i, null));
             valuenum.add(prefMain.getString("KanalNummer" + i, null));
             valuequal.add(prefMain.getInt("KanalQuali" + i, 0));
@@ -152,7 +154,7 @@ public class HttpRequestHandler {
             arrChannelQuality[i] = (int)valuequal.get(i);
         }
         IsFav = (Boolean[]) valuefav.toArray(new Boolean[sizename]);
-        Log.i(""+valuename.size()+" "+valuename,""+arrChannel.length);
+        Log.i(""+valuename.size()+" "+sizename,""+arrChannel.length);
     }
 
     public void setChannel(String channel) {
