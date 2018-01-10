@@ -87,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void piplongclick() {
-        Toast toast;
         if(longclick){
             longclick=false;
             Pip.setBackgroundColor(Color.parseColor("#308774"));
@@ -182,9 +181,7 @@ public class MainActivity extends AppCompatActivity {
             tmp="showPip=0";
             Requester.setPIP(false);
             longclick=false;
-            Toast toast;
-            toast = Toast.makeText(this, "PIP navigation deactivated", Toast.LENGTH_LONG);
-            toast.show();
+            Pip.setBackgroundColor(Color.parseColor("#308774"));
         }
         Requester.executeCmd(tmp);
     }
