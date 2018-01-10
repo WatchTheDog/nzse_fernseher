@@ -245,7 +245,7 @@ public class MainActivity extends AppCompatActivity {
         PipParams.width = ((int)(display.getWidth()*0.94/2));
         PipParams.height = ((int)(display.getHeight()*0.86/4));
         LayoutParams RatioParams = Ratio.getLayoutParams();
-        RatioParams.width = ((int)(display.getWidth()*0.93/2));
+        RatioParams.width = ((int)(display.getWidth()*0.94/2));
         RatioParams.height = ((int)(display.getHeight()*0.86/4));
         LayoutParams RewindParams = Rewind.getLayoutParams();
         RewindParams.width = ((int)(display.getWidth()*0.93/3));
