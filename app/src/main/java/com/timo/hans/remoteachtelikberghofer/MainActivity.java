@@ -89,11 +89,16 @@ public class MainActivity extends AppCompatActivity {
     private void piplongclick() {
         if(longclick){
             longclick=false;
-            Pip.setBackgroundColor(Color.parseColor("#308774"));
+            Pip.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         }
         else {
             longclick = true;
-            Pip.setBackgroundColor(Color.parseColor("#236355"));
+            Pip.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+            if(!Requester.isPIP()){
+                String tmp="showPip=1";
+                Requester.setPIP(true);
+                Requester.executeCmd(tmp);
+            }
         }
     }
 
@@ -181,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
             tmp="showPip=0";
             Requester.setPIP(false);
             longclick=false;
-            Pip.setBackgroundColor(Color.parseColor("#308774"));
+            Pip.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         }
         Requester.executeCmd(tmp);
     }
