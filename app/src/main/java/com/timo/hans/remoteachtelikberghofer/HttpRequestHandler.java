@@ -76,6 +76,10 @@ public class HttpRequestHandler {
                 IsFav[i] = false;
             }
         CheckDoubleChannels();
+        SaveData();
+    }
+
+    public void SaveData() {
         SharedPreferences.Editor ef = prefMain.edit();
         ef.putInt("NameArraySize", arrChannel.length);
         for (int i = 0; i < arrChannel.length; i++) {
@@ -87,19 +91,23 @@ public class HttpRequestHandler {
         ef.commit();
     }
 
-    //Gibt den Channel mit der besser Quality zurück wenn es 2 gleiche gibt
     public void CheckDoubleChannels() {
         int size = arrChannel.length;
         for (int i = 1; i < size; i++) {
             for (int j = 0; j < i; j++) {
+                Log.i(arrChannel[i]+"i"+i, "" + arrChannelQuality[i]);
+                Log.i(arrChannel[j]+"j"+j, "" + arrChannelQuality[j]);
+                Log.i("-----------------------", "--------------------------------");
                 if (arrChannel[j].equals(arrChannel[i])) {
                     if (arrChannelQuality[j] < arrChannelQuality[i]) {
-                        arrChannelQuality[i] = arrChannelQuality[j];
-                        arrChannel[i] = arrChannel[j];
-                        arrChannelNumber[i] = arrChannelNumber[j];
+                        arrChannelQuality[j] = arrChannelQuality[i];
+                        arrChannel[j] = arrChannel[i];
+                        arrChannelNumber[j] = arrChannelNumber[i];
                     }
-                    DeletePos(i);
-                    size--;
+                        DeletePos(i);
+                        size--;
+                        i--;
+                        break;
                 }
             }
         }
@@ -146,6 +154,7 @@ public class HttpRequestHandler {
             valuequal.add(prefMain.getInt("KanalQuali" + i, 0));
             valuefav.add(prefMain.getBoolean("KanalFav" + i, false));
         }
+
         arr = (String[]) value.toArray(new String[size]);
         arrChannel = (String[]) valuename.toArray(new String[sizename]);
         arrChannelNumber = (String[]) valuenum.toArray(new String[sizename]);

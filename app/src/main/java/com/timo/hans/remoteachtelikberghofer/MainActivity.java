@@ -279,6 +279,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         Log.i ("RemoteAchtelikBerghofer", "onStop");
+        Requester.SaveData();
         super.onStop();
     }
 
