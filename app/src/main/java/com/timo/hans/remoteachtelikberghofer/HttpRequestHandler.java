@@ -22,6 +22,7 @@ public class HttpRequestHandler {
     private String[] arrChannel;
     private String[] arrChannelNumber;
     private int[] arrChannelQuality;
+    private Boolean[] IsFav;
     private int CH = 0;
     private int CHPip = 0;
     private boolean isPIP = false;
@@ -47,32 +48,43 @@ public class HttpRequestHandler {
                         .replace("\"channels\":[ ", " ")
                         .replace("\\"+"/","/")
                         .split("\\},");
-                SharedPreferences.Editor ed = prefMain.edit();
+            SharedPreferences.Editor ed = prefMain.edit();
                 ed.putInt("ArraySize", getArrSize());
                 for (int i = 0; i < getArrSize(); i++) {
                     ed.putString("Kanal" + i, arr[i]);
                 }
                 ed.commit();
+            if (arr != null)
+                CleanArr();
             } catch(IOException e){
                 e.printStackTrace();
-                arr = ReadChannels().toArray(new String[0]);
+                ReadChannels();
             } catch(JSONException e){
                 e.printStackTrace();
             }
-        if (arr != null)
-            CleanArr();
     }
 
     public void CleanArr() {
             arrChannel = new String[getArrSize()];
             arrChannelNumber = new String[getArrSize()];
             arrChannelQuality = new int[getArrSize()];
+            IsFav = new Boolean[getArrSize()];
             for (int i = 0; i < arrChannel.length; i++) {
                 arrChannelNumber[i] = getCHNmb(i);
                 arrChannel[i] = getChannel(i);
                 arrChannelQuality[i] = getChannelQuality(i);
+                IsFav[i] = false;
             }
         CheckDoubleChannels();
+        SharedPreferences.Editor ef = prefMain.edit();
+        ef.putInt("NameArraySize", arrChannel.length);
+        for (int i = 0; i < arrChannel.length; i++) {
+            ef.putString("KanalName" + i, arrChannel[i]);
+            ef.putString("KanalNummer" + i, arrChannelNumber[i]);
+            ef.putInt("KanalQuali" + i, arrChannelQuality[i]);
+            ef.putBoolean("KanalFav" + i, IsFav[i]);
+        }
+        ef.commit();
     }
 
     //Gibt den Channel mit der besser Quality zurück wenn es 2 gleiche gibt
@@ -115,13 +127,32 @@ public class HttpRequestHandler {
         }
     }
 
-    public ArrayList<String> ReadChannels() {
+    public void ReadChannels() {
         int size = prefMain.getInt("ArraySize", 0);
+        int sizename = prefMain.getInt("NameArraySize", 0);
+
         ArrayList value = new ArrayList<String>(size);
+        ArrayList valuename = new ArrayList<String>(sizename);
+        ArrayList valuenum = new ArrayList<String>(sizename);
+        ArrayList valuequal = new ArrayList<Integer>(sizename);
+        ArrayList valuefav = new ArrayList<String>(sizename);
+
         for (int i = 0; i < size; i++) {
             value.add(prefMain.getString("Kanal" + i, null));
+            valuename.add(prefMain.getString("KanalName" + i, null));
+            valuenum.add(prefMain.getString("KanalNummer" + i, null));
+            valuequal.add(prefMain.getInt("KanalQuali" + i, 0));
+            valuefav.add(prefMain.getBoolean("KanalFav" + i, false));
         }
-        return value;
+        arr = (String[]) value.toArray(new String[size]);
+        arrChannel = (String[]) valuename.toArray(new String[sizename]);
+        arrChannelNumber = (String[]) valuenum.toArray(new String[sizename]);
+        arrChannelQuality = new int[sizename];
+        for (int i = 0; i < sizename; i++) {
+            arrChannelQuality[i] = (int)valuequal.get(i);
+        }
+        IsFav = (Boolean[]) valuefav.toArray(new Boolean[sizename]);
+        Log.i(""+valuename.size()+" "+valuename,""+arrChannel.length);
     }
 
     public void setChannel(String channel) {
