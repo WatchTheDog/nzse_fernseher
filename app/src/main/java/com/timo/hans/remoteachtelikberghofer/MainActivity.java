@@ -6,6 +6,9 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.shapes.Shape;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -48,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> Favorites;
     private ArrayAdapter<String> mAdapter;
     private ActionBarDrawerToggle mDrawerToggle;
-    private ActionBarDrawerToggle mFavToggle;
+    GradientDrawable pipShape;
     private String mActivityTitle;
     private ImageButton Pip;
     private Boolean longclick=false;
@@ -64,19 +67,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i("RemoteAchtelikBerghofer", "onCreate: ");
+        display = ((android.view.WindowManager)getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        setContentView(R.layout.activity_main);
+        grid = findViewById(R.id.GridLayout);
+        Pip = (ImageButton)findViewById(R.id.btnPicInPic);
+        pipShape = (GradientDrawable) Pip.getBackground();
+        GridSetup();
         Requester = new HttpRequestHandler(this);
         Requester.ChannelScan();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        display = ((android.view.WindowManager)getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         Favs = (ListView) findViewById(R.id.favList);
-        Pip = (ImageButton)findViewById(R.id.btnPicInPic);
-        grid = findViewById(R.id.GridLayout);
         Toolbar t = (Toolbar) findViewById(R.id.toolbar);
         t.setNavigationIcon(R.drawable.ic_menu_white_36dp);
-        Favs.setDivider(new ColorDrawable(getResources().getColor(R.color.colorPrimaryMoreLight)));
+        Favs.setDivider(new ColorDrawable(getResources().getColor(R.color.colorPrimaryLight)));
         Favs.setDividerHeight(5);
-        GridSetup();
         setSupportActionBar(t);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -91,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         mDrawerList = (ListView)findViewById(R.id.navList);
-        mDrawerList.setDivider(new ColorDrawable(getResources().getColor(R.color.colorPrimaryMoreLight)));
+        mDrawerList.setDivider(new ColorDrawable(getResources().getColor(R.color.colorPrimaryLight)));
         mDrawerList.setDividerHeight(5);
         addDrawerItems();
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -127,11 +131,11 @@ public class MainActivity extends AppCompatActivity {
     private void piplongclick() {
         if(longclick){
             longclick=false;
-            Pip.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            pipShape.setColor(getResources().getColor(R.color.colorPrimary));
         }
         else {
             longclick = true;
-            Pip.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+            pipShape.setColor(getResources().getColor(R.color.colorPrimaryDark));
             if(!Requester.isPIP()){
                 String tmp="showPip=1";
                 Requester.setPIP(true);
@@ -221,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
             tmp="showPip=0";
             Requester.setPIP(false);
             longclick=false;
-            Pip.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            pipShape.setColor(getResources().getColor(R.color.colorPrimary));
         }
         Requester.executeCmd(tmp);
     }
@@ -274,37 +278,41 @@ public class MainActivity extends AppCompatActivity {
         ImageButton Rewind = findViewById(R.id.btnRewind);
         ImageButton PlayPause = findViewById(R.id.btnPlayPause);
         ImageButton FastForward = findViewById(R.id.btnFastForward);
+        ImageButton Power = findViewById(R.id.btnPower);
         LayoutParams layoutParams = grid.getLayoutParams();
-        layoutParams.height = ((int)(display.getHeight()*0.92));
-        layoutParams.width = ((int)(display.getWidth()*0.965));
+        layoutParams.height = ((int)(display.getHeight()*0.94));
+        layoutParams.width = ((int)(display.getWidth()*0.964));
         grid.setLayoutParams(layoutParams);
+        LayoutParams PowerParams = Power.getLayoutParams();
+        PowerParams.width = ((int)(display.getWidth()*0.951));
+        PowerParams.height = ((int)(display.getHeight()*0.86/5));
         LayoutParams VolUpParams = VolUp.getLayoutParams();
-        VolUpParams.width = ((int)(display.getWidth()*0.94/2));
-        VolUpParams.height = ((int)(display.getHeight()*0.86/4));
+        VolUpParams.width = ((int)(display.getWidth()*0.937/2));
+        VolUpParams.height = ((int)(display.getHeight()*0.86/5));
         LayoutParams VolDownParams = VolDown.getLayoutParams();
-        VolDownParams.width = ((int)(display.getWidth()*0.94/2));
-        VolDownParams.height = ((int)(display.getHeight()*0.86/4));
+        VolDownParams.width = ((int)(display.getWidth()*0.937/2));
+        VolDownParams.height = ((int)(display.getHeight()*0.86/5));
         LayoutParams ChUpParams = ChUp.getLayoutParams();
-        ChUpParams.width = ((int)(display.getWidth()*0.94/2));
-        ChUpParams.height = ((int)(display.getHeight()*0.86/4));
+        ChUpParams.width = ((int)(display.getWidth()*0.937/2));
+        ChUpParams.height = ((int)(display.getHeight()*0.86/5));
         LayoutParams ChDownParams = ChDown.getLayoutParams();
-        ChDownParams.width = ((int)(display.getWidth()*0.94/2));
-        ChDownParams.height = ((int)(display.getHeight()*0.86/4));
+        ChDownParams.width = ((int)(display.getWidth()*0.937/2));
+        ChDownParams.height = ((int)(display.getHeight()*0.86/5));
         LayoutParams PipParams = Pip.getLayoutParams();
-        PipParams.width = ((int)(display.getWidth()*0.94/2));
-        PipParams.height = ((int)(display.getHeight()*0.86/4));
+        PipParams.width = ((int)(display.getWidth()*0.937/2));
+        PipParams.height = ((int)(display.getHeight()*0.86/5));
         LayoutParams RatioParams = Ratio.getLayoutParams();
-        RatioParams.width = ((int)(display.getWidth()*0.94/2));
-        RatioParams.height = ((int)(display.getHeight()*0.86/4));
+        RatioParams.width = ((int)(display.getWidth()*0.937/2));
+        RatioParams.height = ((int)(display.getHeight()*0.86/5));
         LayoutParams RewindParams = Rewind.getLayoutParams();
-        RewindParams.width = ((int)(display.getWidth()*0.93/3));
-        RewindParams.height = ((int)(display.getHeight()*0.7/4));
+        RewindParams.width = ((int)(display.getWidth()*0.9225/3));
+        RewindParams.height = ((int)(display.getHeight()*0.74/5));
         LayoutParams PlayPauseParams = PlayPause.getLayoutParams();
-        PlayPauseParams.width = ((int)(display.getWidth()*0.93/3));
-        PlayPauseParams.height = ((int)(display.getHeight()*0.7/4));
+        PlayPauseParams.width = ((int)(display.getWidth()*0.9225/3));
+        PlayPauseParams.height = ((int)(display.getHeight()*0.74/5));
         LayoutParams FastForwardParams = FastForward.getLayoutParams();
-        FastForwardParams.width = ((int)(display.getWidth()*0.93/3));
-        FastForwardParams.height = ((int)(display.getHeight()*0.7/4));
+        FastForwardParams.width = ((int)(display.getWidth()*0.9225/3));
+        FastForwardParams.height = ((int)(display.getHeight()*0.74/5));
         VolUp.setLayoutParams(VolUpParams);
         VolDown.setLayoutParams(VolDownParams);
         ChUp.setLayoutParams(ChUpParams);
@@ -314,6 +322,7 @@ public class MainActivity extends AppCompatActivity {
         Rewind.setLayoutParams(RewindParams);
         PlayPause.setLayoutParams(PlayPauseParams);
         FastForward.setLayoutParams(FastForwardParams);
+        Power.setLayoutParams(PowerParams);
     }
 
     /** @brief wird beim Starten ausgeführt.
