@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -73,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
         grid = findViewById(R.id.GridLayout);
         Toolbar t = (Toolbar) findViewById(R.id.toolbar);
         t.setNavigationIcon(R.drawable.ic_menu_white_36dp);
+        Favs.setDivider(new ColorDrawable(getResources().getColor(R.color.colorPrimaryMoreLight)));
+        Favs.setDividerHeight(5);
         GridSetup();
         setSupportActionBar(t);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -88,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         mDrawerList = (ListView)findViewById(R.id.navList);
+        mDrawerList.setDivider(new ColorDrawable(getResources().getColor(R.color.colorPrimaryMoreLight)));
+        mDrawerList.setDividerHeight(5);
         addDrawerItems();
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

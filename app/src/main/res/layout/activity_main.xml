@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
-    android:background="#efefef"
+    android:background="@color/colorBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -24,7 +24,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
+            android:background="@color/colorPrimaryLight"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
         <ImageButton
@@ -32,6 +32,7 @@
             android:layout_width="54dp"
             android:layout_height="54dp"
             android:background="@null"
+            android:tint="#fff"
             android:baselineAligned="true"
             android:onClick="OpenFavs"
             android:padding="10dp"
@@ -51,14 +52,14 @@
         android:layout_width="200dp"
         android:layout_height="match_parent"
         android:layout_gravity="left|start"
-        android:background="#ffeeeeee"/>
+        android:background="@color/colorPrimaryMuchLight" />
 
     <ListView
         android:id="@+id/favList"
         android:layout_width="200dp"
         android:layout_height="match_parent"
         android:layout_gravity="right|end"
-        android:background="#ffeeeeee"
+        android:background="@color/colorPrimaryMuchLight"
         android:layoutDirection="rtl"/>
 
 </android.support.v4.widget.DrawerLayout>
