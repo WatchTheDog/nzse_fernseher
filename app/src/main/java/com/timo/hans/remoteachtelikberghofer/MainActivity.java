@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridLayout;
@@ -41,9 +42,12 @@ public class MainActivity extends AppCompatActivity {
     private HttpRequestHandler Requester;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
+    private ListView Favs;
     private GridLayout grid;
+    private ArrayList<String> Favorites;
     private ArrayAdapter<String> mAdapter;
     private ActionBarDrawerToggle mDrawerToggle;
+    private ActionBarDrawerToggle mFavToggle;
     private String mActivityTitle;
     private ImageButton Pip;
     private Boolean longclick=false;
@@ -64,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         display = ((android.view.WindowManager)getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        Favs = (ListView) findViewById(R.id.favList);
         Pip = (ImageButton)findViewById(R.id.btnPicInPic);
         grid = findViewById(R.id.GridLayout);
         Toolbar t = (Toolbar) findViewById(R.id.toolbar);
@@ -84,6 +89,34 @@ public class MainActivity extends AppCompatActivity {
         });
         mDrawerList = (ListView)findViewById(R.id.navList);
         addDrawerItems();
+        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Requester.setCurrentChannel(Requester.getArrNumber(position));
+            }
+        });
+        mDrawerList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Requester.ToggleIsFav(position);
+                UpdateFavs();
+                return false;
+            }
+        });
+        Favs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String[] tmp = Requester.getArrCh();
+                    for (int i = 0; i <tmp.length; i++) {
+                        Log.i(tmp[i], Favorites.get(position));
+                        Log.i("-------------","----------------------");
+                        if (tmp[i].equals(Favorites.get(position))) {
+                            Requester.setCurrentChannel(Requester.getArrNumber(i));
+                            break;
+                        }
+                    }
+            }
+        });
     }
 
     private void piplongclick() {
@@ -102,11 +135,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /** @brief wird beim Klicken auf Hello World ausgeführt.
-     *     * @param v
-     */
-    public void onHelloWorldClick (View v) {
-        Log.i("RemoteAchtelikBerghofer", "onHelloWorldClick: ");
+    public void OpenFavs (View v) {
+        mDrawerLayout.openDrawer(Favs);
     }
 
     public void IncreaseVol(View v){
@@ -212,10 +242,22 @@ public class MainActivity extends AppCompatActivity {
 
     private void addDrawerItems() {
         if (Requester.getArr() != null) {
-            String[] arr = Requester.getArrCh();
-            mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arr);
+            String[] arrAll = Requester.getArrCh();
+            mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrAll);
             mDrawerList.setAdapter(mAdapter);
+            UpdateFavs();
         }
+    }
+
+    private void UpdateFavs() {
+        Favorites = new ArrayList<>();
+        for (int i = 0; i < Requester.getArrQuality().length; i++) {
+            if (Requester.getIsFav(i))
+                Favorites.add(Requester.getArrCh()[i]);
+        }
+        ArrayAdapter<String> FavAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,Favorites);
+        Favs.setAdapter(FavAdapter);
+        Requester.SaveData();
     }
 
     private void GridSetup() {

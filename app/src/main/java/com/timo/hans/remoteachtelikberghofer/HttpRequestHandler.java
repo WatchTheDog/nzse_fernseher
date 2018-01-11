@@ -22,7 +22,7 @@ public class HttpRequestHandler {
     private String[] arrChannel;
     private String[] arrChannelNumber;
     private int[] arrChannelQuality;
-    private Boolean[] IsFav;
+    private boolean[] IsFav;
     private int CH = 0;
     private int CHPip = 0;
     private boolean isPIP = false;
@@ -68,12 +68,10 @@ public class HttpRequestHandler {
             arrChannel = new String[getArrSize()];
             arrChannelNumber = new String[getArrSize()];
             arrChannelQuality = new int[getArrSize()];
-            IsFav = new Boolean[getArrSize()];
             for (int i = 0; i < arrChannel.length; i++) {
                 arrChannelNumber[i] = getCHNmb(i);
                 arrChannel[i] = getChannel(i);
                 arrChannelQuality[i] = getChannelQuality(i);
-                IsFav[i] = false;
             }
         CheckDoubleChannels();
         SaveData();
@@ -95,9 +93,6 @@ public class HttpRequestHandler {
         int size = arrChannel.length;
         for (int i = 1; i < size; i++) {
             for (int j = 0; j < i; j++) {
-                Log.i(arrChannel[i]+"i"+i, "" + arrChannelQuality[i]);
-                Log.i(arrChannel[j]+"j"+j, "" + arrChannelQuality[j]);
-                Log.i("-----------------------", "--------------------------------");
                 if (arrChannel[j].equals(arrChannel[i])) {
                     if (arrChannelQuality[j] < arrChannelQuality[i]) {
                         arrChannelQuality[j] = arrChannelQuality[i];
@@ -110,6 +105,9 @@ public class HttpRequestHandler {
                         break;
                 }
             }
+            IsFav = new boolean[arrChannel.length];
+            for (int k = 0; k < arrChannel.length; k++)
+                IsFav[k] = prefMain.getBoolean("KanalFav" + k, false);
         }
     }
 
@@ -143,7 +141,7 @@ public class HttpRequestHandler {
         ArrayList valuename = new ArrayList<String>(sizename);
         ArrayList valuenum = new ArrayList<String>(sizename);
         ArrayList valuequal = new ArrayList<Integer>(sizename);
-        ArrayList valuefav = new ArrayList<String>(sizename);
+        ArrayList valuefav = new ArrayList<Boolean>(sizename);
 
         for (int i = 0; i < size; i++)
             value.add(prefMain.getString("Kanal" + i, null));
@@ -162,13 +160,15 @@ public class HttpRequestHandler {
         for (int i = 0; i < sizename; i++) {
             arrChannelQuality[i] = (int)valuequal.get(i);
         }
-        IsFav = (Boolean[]) valuefav.toArray(new Boolean[sizename]);
-        Log.i(""+valuename.size()+" "+sizename,""+arrChannel.length);
+        IsFav = new boolean[sizename];
+        for (int i = 0; i < sizename; i++) {
+            IsFav[i] = (boolean)valuefav.get(i);
+        }
     }
 
-    public void setChannel(String channel) {
+    public void setCurrentChannel(String channel) {
         if (isPIP())
-            executeCmd("channelPip"+channel);
+            executeCmd("channelPip="+channel);
         else
             executeCmd("channelMain="+channel);
     }
@@ -190,15 +190,15 @@ public class HttpRequestHandler {
 
     public void checkZero() {
         if (CH < 0)
-            setCH(getArrSize()-1);
+            setCH(getArrChSize()-1);
         if (CHPip < 0)
-            setCHPip(getArrSize()-1);
+            setCHPip(getArrChSize()-1);
     }
 
     public void checkMax() {
-        if (CH >= getArrSize())
+        if (CH >= getArrChSize())
             setCH(0);
-        if (CHPip >= getArrSize())
+        if (CHPip >= getArrChSize())
             setCHPip(0);
     }
 
@@ -250,9 +250,8 @@ public class HttpRequestHandler {
         return tmp;
     }
 
-    public String[] getArrNumber() {
-        String[] tmp = arrChannelNumber;
-        return tmp;
+    public String getArrNumber(int i) {
+        return arrChannelNumber[i];
     }
 
     public int[] getArrQuality() {
@@ -263,5 +262,21 @@ public class HttpRequestHandler {
     public int getArrSize() {
         int tmp = arr.length;
         return tmp;
+    }
+
+    public int getArrChSize() {
+        int tmp = arrChannel.length;
+        return tmp;
+    }
+
+    public boolean getIsFav(int i) {
+        return IsFav[i];
+    }
+
+    public void ToggleIsFav(int i) {
+        if (getIsFav(i))
+            IsFav[i] = false;
+        else
+            IsFav[i] = true;
     }
 }

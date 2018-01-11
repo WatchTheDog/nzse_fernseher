@@ -8,14 +8,16 @@
 
     <Button
         android:id="@+id/start_kanalscan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="261dp"
+        android:layout_height="92dp"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/kanalscan_design"
+        android:background="@color/colorPrimary"
         android:onClick="showpickMode"
-        android:padding="10dp"
+        android:padding="15dp"
         android:text="Kanalscan starten"
+        android:textSize="16dp"
         app:layout_constraintBottom_toTopOf="@+id/skip_kanalscan"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +40,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <TextView
         android:id="@+id/skip_kanalscan"
         android:layout_width="123dp"
         android:layout_height="wrap_content"
