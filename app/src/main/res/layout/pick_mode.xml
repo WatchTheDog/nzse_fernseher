@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground">
+    android:background="@color/colorPrimaryMuchLight">
 
     <TextView
         android:id="@+id/textView2"
@@ -32,8 +32,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="64dp"
-        android:background="@color/colorPrimary"
-        android:onClick="showMainView"
+        android:background="@drawable/roundcorners"
+        android:onClick="showBeginnerView"
         android:padding="15px"
         android:text="Beginner"
         android:textSize="16dp"
@@ -51,7 +51,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="15dp"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/roundcorners"
         android:onClick="showMainView"
         android:padding="15px"
         android:text="Experte"

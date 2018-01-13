@@ -14,15 +14,18 @@ import android.view.View;
  */
 
 public class SelectModeActivity extends AppCompatActivity {
+    private SharedPreferences pref;
+    private SharedPreferences.Editor ed;
     protected void onCreate(Bundle savedInstanceState) {
         Log.i("RemoteAchtelikBerghofer", "onCreate: ");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pick_mode);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
-        SharedPreferences pref = getSharedPreferences("ActivityPREF", Context.MODE_PRIVATE);
+        pref = getSharedPreferences("ActivityPREF", Context.MODE_PRIVATE);
         if(pref.getBoolean("select_executed", false)){
             Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("beginner", pref.getBoolean("beginner",false));
             startActivity(intent);
             finish();
         } else {
@@ -32,8 +35,21 @@ public class SelectModeActivity extends AppCompatActivity {
         }
 
     }
-       public void showMainView(View view){
+       public void showBeginnerView(View view){
+        ed = pref.edit();
+        ed.putBoolean("beginner", true);
+        ed.commit();
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("beginner", true);
+        startActivity(intent);
+    }
+
+    public void showMainView(View view){
+        ed = pref.edit();
+        ed.putBoolean("beginner", false);
+        ed.commit();
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("beginner", false);
         startActivity(intent);
     }
 }
