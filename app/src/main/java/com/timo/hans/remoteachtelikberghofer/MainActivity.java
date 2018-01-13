@@ -17,12 +17,16 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -31,6 +35,7 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import org.json.*;
@@ -57,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
     private Boolean longclick=false;
     private Boolean on = false;
     private android.view.Display display;
+    boolean hasSoftKey;
 
     public MainActivity() {
     }
@@ -75,15 +81,27 @@ public class MainActivity extends AppCompatActivity {
             grid = findViewById(R.id.GridLayout);
             Pip = (ImageButton)findViewById(R.id.btnPicInPic);
             pipShape = (GradientDrawable) Pip.getBackground();
-            GridSetup(5);
+            if (!hasSoftKeys(getWindowManager()))
+                GridSetup(5, 0.94, 0.86,0.74);
+            else
+                GridSetup(5, 0.93, 0.84,0.72);
         }
         else {
             setContentView(R.layout.activity_beginner);
             grid = findViewById(R.id.GridLayout);
-            GridSetup(3);
+            if (!hasSoftKeys(getWindowManager()))
+                GridSetup(3, 0.94, 0.86,0.74);
+            else
+                GridSetup(3, 0.93, 0.835,0.72);
         }
+
         Requester = new HttpRequestHandler(this);
-        Requester.ChannelScan();
+        if (getIntent().getBooleanExtra("first", true)) {
+            Requester.ChannelScan();
+        }
+        else
+            Requester.ReadChannels();
+
         Favs = (ListView) findViewById(R.id.favList);
         Toolbar t = (Toolbar) findViewById(R.id.toolbar);
         t.setNavigationIcon(R.drawable.ic_menu_white_36dp);
@@ -307,7 +325,25 @@ public class MainActivity extends AppCompatActivity {
         Requester.SaveData();
     }
 
-    private void GridSetup(int rows) {
+    public static boolean hasSoftKeys(WindowManager windowManager){
+        Display d = windowManager.getDefaultDisplay();
+
+        DisplayMetrics realDisplayMetrics = new DisplayMetrics();
+        d.getRealMetrics(realDisplayMetrics);
+
+        int realHeight = realDisplayMetrics.heightPixels;
+        int realWidth = realDisplayMetrics.widthPixels;
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        d.getMetrics(displayMetrics);
+
+        int displayHeight = displayMetrics.heightPixels;
+        int displayWidth = displayMetrics.widthPixels;
+
+        return (realWidth - displayWidth) > 0 || (realHeight - displayHeight) > 0;
+    }
+
+    private void GridSetup(int rows, double gridheight, double upperBtnHeight, double lowerBtnHeight) {
         ImageButton VolUp = findViewById(R.id.btnVolUp);
         ImageButton VolDown = findViewById(R.id.btnVolDown);
         ImageButton ChUp = findViewById(R.id.btnCHup);
@@ -318,40 +354,40 @@ public class MainActivity extends AppCompatActivity {
         ImageButton FastForward = findViewById(R.id.btnFastForward);
         ImageButton Power = findViewById(R.id.btnPower);
         LayoutParams layoutParams = grid.getLayoutParams();
-        layoutParams.height = ((int)(display.getHeight()*0.94));
+        layoutParams.height = ((int)(display.getHeight()*gridheight));
         layoutParams.width = ((int)(display.getWidth()*0.964));
         grid.setLayoutParams(layoutParams);
         LayoutParams PowerParams = Power.getLayoutParams();
         PowerParams.width = ((int)(display.getWidth()*0.951));
-        PowerParams.height = ((int)(display.getHeight()*0.86/rows));
+        PowerParams.height = ((int)(display.getHeight()*upperBtnHeight/rows));
         LayoutParams VolUpParams = VolUp.getLayoutParams();
         VolUpParams.width = ((int)(display.getWidth()*0.937/2));
-        VolUpParams.height = ((int)(display.getHeight()*0.86/rows));
+        VolUpParams.height = ((int)(display.getHeight()*upperBtnHeight/rows));
         LayoutParams VolDownParams = VolDown.getLayoutParams();
         VolDownParams.width = ((int)(display.getWidth()*0.937/2));
-        VolDownParams.height = ((int)(display.getHeight()*0.86/rows));
+        VolDownParams.height = ((int)(display.getHeight()*upperBtnHeight/rows));
         LayoutParams ChUpParams = ChUp.getLayoutParams();
         ChUpParams.width = ((int)(display.getWidth()*0.937/2));
-        ChUpParams.height = ((int)(display.getHeight()*0.86/rows));
+        ChUpParams.height = ((int)(display.getHeight()*upperBtnHeight/rows));
         LayoutParams ChDownParams = ChDown.getLayoutParams();
         ChDownParams.width = ((int)(display.getWidth()*0.937/2));
-        ChDownParams.height = ((int)(display.getHeight()*0.86/rows));
+        ChDownParams.height = ((int)(display.getHeight()*upperBtnHeight/rows));
         if (!getIntent().getBooleanExtra("beginner", false)) {
             LayoutParams PipParams = Pip.getLayoutParams();
             PipParams.width = ((int)(display.getWidth()*0.937/2));
-            PipParams.height = ((int)(display.getHeight()*0.86/rows));
+            PipParams.height = ((int)(display.getHeight()*upperBtnHeight/rows));
             LayoutParams RatioParams = Ratio.getLayoutParams();
             RatioParams.width = ((int) (display.getWidth() * 0.937 / 2));
-            RatioParams.height = ((int) (display.getHeight() * 0.86 / rows));
+            RatioParams.height = ((int) (display.getHeight() * upperBtnHeight / rows));
             LayoutParams RewindParams = Rewind.getLayoutParams();
             RewindParams.width = ((int) (display.getWidth() * 0.9225 / 3));
-            RewindParams.height = ((int) (display.getHeight() * 0.74 / rows));
+            RewindParams.height = ((int) (display.getHeight() * lowerBtnHeight / rows));
             LayoutParams PlayPauseParams = PlayPause.getLayoutParams();
             PlayPauseParams.width = ((int) (display.getWidth() * 0.9225 / 3));
-            PlayPauseParams.height = ((int) (display.getHeight() * 0.74 / rows));
+            PlayPauseParams.height = ((int) (display.getHeight() * lowerBtnHeight / rows));
             LayoutParams FastForwardParams = FastForward.getLayoutParams();
             FastForwardParams.width = ((int) (display.getWidth() * 0.9225 / 3));
-            FastForwardParams.height = ((int) (display.getHeight() * 0.74 / rows));
+            FastForwardParams.height = ((int) (display.getHeight() * lowerBtnHeight / rows));
             Pip.setLayoutParams(PipParams);
             Ratio.setLayoutParams(RatioParams);
             Rewind.setLayoutParams(RewindParams);
