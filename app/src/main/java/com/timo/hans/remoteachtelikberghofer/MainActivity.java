@@ -239,13 +239,13 @@ public class MainActivity extends AppCompatActivity {
         if(!longclick) {
             Requester.setCH(Requester.getCH()+1);
             Requester.checkMax();
-            String tmp = "channelMain=" + Requester.getCHNmb(Requester.getCH());
+            String tmp = "channelMain=" + Requester.getArrNumber(Requester.getCH());
             Requester.executeCmd(tmp);
         }
         else{
             Requester.setCHPip(Requester.getCHPip()+1);
             Requester.checkMax();
-            String tmp = "channelPip=" + Requester.getCHNmb(Requester.getCHPip());
+            String tmp = "channelPip=" + Requester.getArrNumber(Requester.getCHPip());
             Requester.executeCmd(tmp);
         }
         if (!on)
@@ -256,13 +256,13 @@ public class MainActivity extends AppCompatActivity {
         if(!longclick) {
             Requester.setCH(Requester.getCH()-1);
             Requester.checkZero();
-            String tmp = "channelMain=" + Requester.getCHNmb(Requester.getCH());
+            String tmp = "channelMain=" + Requester.getArrNumber(Requester.getCH());
             Requester.executeCmd(tmp);
         }
         else{
             Requester.setCHPip(Requester.getCHPip()-1);
             Requester.checkZero();
-            String tmp = "channelPip=" + Requester.getCHNmb(Requester.getCHPip());
+            String tmp = "channelPip=" + Requester.getArrNumber(Requester.getCHPip());
             Requester.executeCmd(tmp);
         }
         if (!on)
