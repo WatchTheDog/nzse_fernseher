@@ -221,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
     public void FastForward(View v) {
         new Thread(new Runnable() {
             public void run() {
-                while (TimeShiftDelay>0 || !Pause) {
+                while (TimeShiftDelay>0 && !Pause) {
                     try {
                         Thread.sleep(1000);
                         TimeShiftDelay--;
@@ -239,7 +239,7 @@ public class MainActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             int tmp = TimeShiftDelay;
             public void run() {
-                while (tmp<=TimeShiftDelay || !Pause) {
+                while (tmp<=TimeShiftDelay && !Pause) {
                     try {
                         Thread.sleep(1000);
                         TimeShiftDelay++;
