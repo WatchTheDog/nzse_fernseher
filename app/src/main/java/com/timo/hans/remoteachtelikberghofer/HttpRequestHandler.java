@@ -28,6 +28,7 @@ public class HttpRequestHandler {
     private boolean isPIP = false;
     private boolean zoomed = false;
     private HttpRequest TV;
+    private Boolean on = false;
 
     public HttpRequestHandler(Context context) {
         TV = new HttpRequest("192.168.178.21", 5000, true);
@@ -278,5 +279,13 @@ public class HttpRequestHandler {
             IsFav[i] = false;
         else
             IsFav[i] = true;
+    }
+
+    public Boolean getOn() {
+        return on;
+    }
+
+    public void setOn(Boolean on) {
+        this.on = on;
     }
 }

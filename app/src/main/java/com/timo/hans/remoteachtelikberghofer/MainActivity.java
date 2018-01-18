@@ -43,6 +43,7 @@ import org.json.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -54,13 +55,13 @@ public class MainActivity extends AppCompatActivity {
     private ListView Favs;
     private GridLayout grid;
     private ArrayList<String> Favorites;
-    private ArrayAdapter<String> mAdapter;
+    private MyCustomAdapter mAdapter;
     private ActionBarDrawerToggle mDrawerToggle;
     private GradientDrawable pipShape;
     private String mActivityTitle;
     private ImageButton Pip;
+    private ImageButton PlayPause;
     private Boolean longclick=false;
-    private Boolean on = false;
     private android.view.Display display;
     boolean hasSoftKey;
 
@@ -81,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
             grid = findViewById(R.id.GridLayout);
             Pip = (ImageButton)findViewById(R.id.btnPicInPic);
             pipShape = (GradientDrawable) Pip.getBackground();
+            PlayPause = findViewById(R.id.btnPlayPause);
             if (!hasSoftKeys(getWindowManager()))
                 GridSetup(5, 0.94, 0.86,0.74);
             else
@@ -90,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
             setContentView(R.layout.activity_beginner);
             grid = findViewById(R.id.GridLayout);
             if (!hasSoftKeys(getWindowManager()))
-                GridSetup(3, 0.94, 0.86,0.74);
+                GridSetup(3, 0.94, 0.85,0.71);
             else
                 GridSetup(3, 0.93, 0.835,0.72);
         }
@@ -125,31 +127,17 @@ public class MainActivity extends AppCompatActivity {
         mDrawerList.setDivider(new ColorDrawable(getResources().getColor(R.color.colorPrimaryLight)));
         mDrawerList.setDividerHeight(5);
         addDrawerItems();
-        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Requester.setCurrentChannel(Requester.getArrNumber(position));
-                if (!on)
-                    on = true;
-            }
-        });
-        mDrawerList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Requester.ToggleIsFav(position);
-                UpdateFavs();
-                return false;
-            }
-        });
+
         Favs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String[] tmp = Requester.getArrCh();
                     for (int i = 0; i <tmp.length; i++) {
-                        if (tmp[i].equals(Favorites.get(position))) {
+                        if (tmp[i].equals(Favorites.get(position-2))) {
                             Requester.setCurrentChannel(Requester.getArrNumber(i));
-                            if (!on)
-                                on = true;
+                            Requester.setCH(i);
+                            if (!Requester.getOn())
+                                Requester.setOn(true);
                             break;
                         }
                     }
@@ -171,8 +159,8 @@ public class MainActivity extends AppCompatActivity {
                 Requester.executeCmd(tmp);
             }
         }
-        if (!on)
-            on = true;
+        if (!Requester.getOn())
+            Requester.setOn(true);
     }
 
     public void OpenFavs (View v) {
@@ -183,29 +171,36 @@ public class MainActivity extends AppCompatActivity {
         Requester.setVol(Requester.getVol()+1);
         String tmp="volume=" + Requester.getVol();
         Requester.executeCmd(tmp);
-        if (!on)
-            on = true;
+        if (!Requester.getOn())
+            Requester.setOn(true);
     }
 
     public void Standby(View v){
         String tmp;
-        if (on) {
+        if (Requester.getOn()) {
             tmp = "standby=1";
-            on = false;
+            Requester.setOn(false);
         }
         else {
             tmp = "standby=0";
-            on = true;
+            Requester.setOn(true);
         }
         Requester.executeCmd(tmp);
+    }
+
+    public void Pause(View v){
+        Requester.setOn(true);
+        Requester.executeCmd("timeShiftPause=");
+        PlayPause.setImageResource(R.drawable.ic_pause_white_48dp);
+
     }
 
     public void DecreaseVol(View v){
         Requester.setVol(Requester.getVol()-1);
         String tmp="volume=" + Requester.getVol();
         Requester.executeCmd(tmp);
-        if (!on)
-            on = true;
+        if (!Requester.getOn())
+            Requester.setOn(true);
     }
 
     public void Zoom(View v){
@@ -231,42 +226,42 @@ public class MainActivity extends AppCompatActivity {
             }
             Requester.executeCmd(tmp);
         }
-        if (!on)
-            on = true;
+        if (!Requester.getOn())
+            Requester.setOn(true);
     }
 
     public void switchChannelUp(View v){
         if(!longclick) {
-            Requester.setCH(Requester.getCH()+1);
-            Requester.checkMax();
-            String tmp = "channelMain=" + Requester.getArrNumber(Requester.getCH());
-            Requester.executeCmd(tmp);
-        }
-        else{
-            Requester.setCHPip(Requester.getCHPip()+1);
-            Requester.checkMax();
-            String tmp = "channelPip=" + Requester.getArrNumber(Requester.getCHPip());
-            Requester.executeCmd(tmp);
-        }
-        if (!on)
-            on = true;
-    }
-
-    public void switchChannelDown(View v){
-        if(!longclick) {
             Requester.setCH(Requester.getCH()-1);
-            Requester.checkZero();
+            Requester.checkMax();
             String tmp = "channelMain=" + Requester.getArrNumber(Requester.getCH());
             Requester.executeCmd(tmp);
         }
         else{
             Requester.setCHPip(Requester.getCHPip()-1);
+            Requester.checkMax();
+            String tmp = "channelPip=" + Requester.getArrNumber(Requester.getCHPip());
+            Requester.executeCmd(tmp);
+        }
+        if (!Requester.getOn())
+            Requester.setOn(true);
+    }
+
+    public void switchChannelDown(View v){
+        if(!longclick) {
+            Requester.setCH(Requester.getCH()+1);
+            Requester.checkZero();
+            String tmp = "channelMain=" + Requester.getArrNumber(Requester.getCH());
+            Requester.executeCmd(tmp);
+        }
+        else{
+            Requester.setCHPip(Requester.getCHPip()+1);
             Requester.checkZero();
             String tmp = "channelPip=" + Requester.getArrNumber(Requester.getCHPip());
             Requester.executeCmd(tmp);
         }
-        if (!on)
-            on = true;
+        if (!Requester.getOn())
+            Requester.setOn(true);
     }
 
     public void PIP(View v){
@@ -282,8 +277,8 @@ public class MainActivity extends AppCompatActivity {
             pipShape.setColor(getResources().getColor(R.color.colorPrimary));
         }
         Requester.executeCmd(tmp);
-        if (!on)
-            on = true;
+        if (!Requester.getOn())
+            Requester.setOn(true);
     }
 
     private void setupDrawer() {
@@ -308,7 +303,15 @@ public class MainActivity extends AppCompatActivity {
     private void addDrawerItems() {
         if (Requester.getArr() != null) {
             String[] arrAll = Requester.getArrCh();
-            mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrAll);
+            ArrayList<String> arraylist = new ArrayList<>();
+            arraylist.add("Kanalscan");
+            arraylist.add("Modus ändern");
+
+            for (int i = 0; i < arrAll.length; i++) {
+                arraylist.add(arrAll[i]);
+            }
+
+            mAdapter = new MyCustomAdapter(arraylist, this, Requester, Favorites, Favs, mDrawerList, (GridLayout)findViewById(R.id.GridLayout), (RelativeLayout) findViewById(R.id.loadingPanel2));
             mDrawerList.setAdapter(mAdapter);
             UpdateFavs();
         }
