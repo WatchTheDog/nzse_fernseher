@@ -64,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
     private Boolean longclick=false;
     private android.view.Display display;
     boolean hasSoftKey;
+    boolean Pause = false;
+    private int TimeShiftDelay=0;
 
     public MainActivity() {
     }
@@ -189,10 +191,66 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Pause(View v){
-        Requester.setOn(true);
-        Requester.executeCmd("timeShiftPause=");
-        PlayPause.setImageResource(R.drawable.ic_pause_white_48dp);
+        if (!Pause) {
+            new Thread(new Runnable() {
+                public void run() {
+                    Requester.setOn(true);
+                    PlayPause.setImageResource(R.drawable.ic_play_arrow_white_48dp);
+                    Pause=true;
+                    Requester.executeCmd("timeShiftPause=");
+                   while (Pause) {
+                       try {
+                           Thread.sleep(1000);
+                           TimeShiftDelay++;
+                           Log.i("Counter",""+TimeShiftDelay);
+                       } catch (InterruptedException e) {
+                           e.printStackTrace();
+                       }
+                   }
+                }
+            }).start();
 
+        } else {
+            Requester.executeCmd("timeShiftPlay="+TimeShiftDelay);
+            PlayPause.setImageResource(R.drawable.ic_pause_white_48dp);
+            Pause=false;
+        }
+
+    }
+
+    public void FastForward(View v) {
+        new Thread(new Runnable() {
+            public void run() {
+                while (TimeShiftDelay>0 || !Pause) {
+                    try {
+                        Thread.sleep(1000);
+                        TimeShiftDelay--;
+                        Requester.executeCmd("timeShiftPlay="+TimeShiftDelay);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        }).start();
+    }
+
+    public void Rewind(View v) {
+        new Thread(new Runnable() {
+            int tmp = TimeShiftDelay;
+            public void run() {
+                while (tmp<=TimeShiftDelay || !Pause) {
+                    try {
+                        Thread.sleep(1000);
+                        TimeShiftDelay++;
+                        Requester.executeCmd("timeShiftPlay="+TimeShiftDelay);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                TimeShiftDelay = tmp;
+            }
+        }).start();
     }
 
     public void DecreaseVol(View v){

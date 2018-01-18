@@ -154,6 +154,7 @@
             android:layout_columnSpan="2"
             android:layout_margin="3dp"
             android:layout_row="5"
+            android:onClick="Rewind"
             android:background="@drawable/roundcorners"
             android:padding="30dp"
             android:scaleType="fitCenter"
@@ -172,7 +173,7 @@
             android:onClick="Pause"
             android:padding="30dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_play_arrow_white_48dp"
+            android:src="@drawable/ic_pause_white_48dp"
             android:tint="@color/colorPrimaryMuchLight" />
 
         <ImageButton
@@ -183,6 +184,7 @@
             android:layout_columnSpan="2"
             android:layout_margin="3dp"
             android:layout_row="5"
+            android:onClick="FastForward"
             android:background="@drawable/roundcorners"
             android:padding="30dp"
             android:scaleType="fitCenter"

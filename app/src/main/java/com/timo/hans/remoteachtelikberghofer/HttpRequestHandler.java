@@ -31,7 +31,7 @@ public class HttpRequestHandler {
     private Boolean on = false;
 
     public HttpRequestHandler(Context context) {
-        TV = new HttpRequest("192.168.178.21", 5000, true);
+        TV = new HttpRequest("172.16.204.133", 5000, true);
         prefMain = context.getSharedPreferences("HttpRequestHandlerPREF", Context.MODE_PRIVATE);
         executeCmd("volume=" + vol);
     }
